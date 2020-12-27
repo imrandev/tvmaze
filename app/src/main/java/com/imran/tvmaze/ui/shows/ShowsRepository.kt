@@ -30,7 +30,6 @@ class ShowsRepository {
         RetrofitClient.getInstance(Constant.BASE_URL, context).findShows().enqueue(object : EnqueueResponse<Shows>() {
             override fun onReceived(body: Shows?, message: String?) {
                 body.let {
-                    /*Collections.shuffle(body!!)*/
                     data.value = body
                 }
                 Log.d(TAG, "onReceived: $message")
