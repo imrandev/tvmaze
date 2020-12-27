@@ -78,7 +78,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
             String.format("%s %s", days, DateUtil.getFormattedTime(item.schedule.time))
 
         fragmentInfoBinding.tvShowsNetwork.text =
-            String.format("%s, %s", item.network?.name, item.network.country.code)
+            String.format("%s, %s", item.network?.name, item.network?.country.code)
     }
 
     override fun getLayoutRes(): Int {
