@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.shows.InfoFragment">
+
+            <ImageView
+                android:id="@+id/iv_shows_cover_photo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_160sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_local_movies_green_600_24dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_160sdp"
+                android:background="#40000000"
+                android:src="@drawable/bottom_divider"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_shows_cover_poster"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_130sdp"
+                android:src="@drawable/baseline_local_movies_green_600_24dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_shows_cover_photo"
+                app:layout_constraintEnd_toEndOf="@+id/iv_shows_cover_photo"
+                app:layout_constraintStart_toStartOf="@+id/iv_shows_cover_photo"
+                app:layout_constraintTop_toTopOf="@+id/iv_shows_cover_photo" />
+
+            <TextView
+                android:id="@+id/tv_shows_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:text="Under the Dome"
+                android:textSize="@dimen/_20sdp"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/titillium_web_semibold"
+                app:layout_constraintTop_toBottomOf="@+id/iv_shows_cover_photo"/>
+
+            <TextView
+                android:id="@+id/tv_shows_runtime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="60 Minutes"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                android:fontFamily="@font/titillium_web_light"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_name"/>
+
+            <RatingBar
+                android:id="@+id/rb_shows_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:numStars="5"
+                android:stepSize=".1"
+                android:isIndicator="true"
+                android:layout_marginTop="@dimen/_2sdp"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_runtime"/>
+
+            <TextView
+                android:id="@+id/tv_shows_genres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Action, Drama"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                android:fontFamily="@font/poppins_light"
+                android:background="@drawable/bottom_divider"
+                android:paddingBottom="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintTop_toBottomOf="@+id/rb_shows_rating"/>
+
+            <TextView
+                android:id="@+id/tv_shows_info_title"
+                android:text="Information"
+                android:textSize="@dimen/_12sdp"
+                android:padding="@dimen/_4sdp"
+                android:fontFamily="@font/titillium_web"
+                android:textColor="@android:color/black"
+                android:layout_width="0dp"
+                android:gravity="center_vertical"
+                android:layout_height="@dimen/_30sdp"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_genres"/>
+
+            <View
+                android:id="@+id/view_center"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_shows_type_title"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/titillium_web_semibold"
+                android:text="Type"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toStartOf="@+id/view_center"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_info_title" />
+
+            <TextView
+                android:id="@+id/tv_shows_type"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/poppins_light"
+                android:text="Scripted"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintStart_toEndOf="@+id/view_center"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_info_title" />
+
+            <TextView
+                android:id="@+id/tv_shows_status_title"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/titillium_web_semibold"
+                android:text="Status"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toStartOf="@+id/view_center"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_type_title" />
+
+            <TextView
+                android:id="@+id/tv_shows_status"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/poppins_light"
+                android:text="Ended"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@android:color/holo_red_dark"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintStart_toEndOf="@+id/view_center"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_type_title" />
+
+            <TextView
+                android:id="@+id/tv_shows_lang_title"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/titillium_web_semibold"
+                android:text="Language"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toStartOf="@+id/view_center"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_status_title" />
+
+            <TextView
+                android:id="@+id/tv_shows_lang"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/poppins_light"
+                android:text="English"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintStart_toEndOf="@+id/view_center"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_status_title" />
+
+            <TextView
+                android:id="@+id/tv_shows_premiered_title"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/titillium_web_semibold"
+                android:text="Premiered"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toStartOf="@+id/view_center"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_lang_title" />
+
+            <TextView
+                android:id="@+id/tv_shows_premiered"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/poppins_light"
+                android:text="14 Jan 2011"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintStart_toEndOf="@+id/view_center"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_lang_title" />
+
+            <TextView
+                android:id="@+id/tv_shows_summary_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Summary"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/titillium_web"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_premiered_title"/>
+
+            <TextView
+                android:id="@+id/tv_shows_summary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Under the Dome is the story of a small town that is suddenly and inexplicably sealed off from the rest of the world by an enormous transparent dome. The town's inhabitants must deal with surviving the post-apocalyptic conditions while searching for answers about the dome, where it came from and if and when it will go away."
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_summary_title"/>
+
+            <TextView
+                android:id="@+id/tv_shows_schedule_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Schedule"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/titillium_web"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_summary"/>
+
+            <TextView
+                android:id="@+id/tv_shows_schedule"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Thursday, 10 PM"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:paddingBottom="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_schedule_title"/>
+
+            <TextView
+                android:id="@+id/tv_shows_network_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Network"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/titillium_web"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_schedule"/>
+
+            <TextView
+                android:id="@+id/tv_shows_network"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CBS, US"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:paddingBottom="@dimen/_12sdp"
+                android:background="@drawable/bottom_divider"
+                app:layout_constraintStart_toStartOf="@+id/tv_shows_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_shows_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_shows_network_title"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
