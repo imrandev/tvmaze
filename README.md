@@ -2,6 +2,8 @@
 
 Coding Interview – Android App Developer
 
+Download APK - <a href="/app-debug.apk">Click here to download</>
+
 # Technology
 * MVVM Architecture
 * Retrofit with offline cache
