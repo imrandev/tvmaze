@@ -1,8 +1,13 @@
 package com.imran.tvmaze.ui.holder
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.imran.tvmaze.R
 import com.imran.tvmaze.databinding.RvItemEmptyBinding
 import com.imran.tvmaze.databinding.RvItemShowsBinding
@@ -35,8 +40,33 @@ class ShowsRecyclerHolder (private val viewDataBinding: ViewDataBinding) : BaseV
         val itemShowsBinding = viewDataBinding as RvItemShowsBinding
 
         Glide.with(itemView)
-            .asDrawable()
             .load(`object`.image.medium)
+            .override(
+                itemShowsBinding.rvItemShowsPoster.measuredWidth,
+                itemShowsBinding.rvItemShowsPoster.measuredHeight
+            )
+            .listener(object : RequestListener<Drawable?> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable?>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    itemShowsBinding.itemProgressBar.visibility = View.GONE
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable?>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    itemShowsBinding.itemProgressBar.visibility = View.GONE
+                    return false
+                }
+            })
             .error(R.drawable.baseline_local_movies_green_600_24dp)
             .into(itemShowsBinding.rvItemShowsPoster)
 

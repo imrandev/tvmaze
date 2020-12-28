@@ -36,14 +36,20 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
     private fun populateShowsInfo() {
 
         Glide.with(requireContext())
-            .asDrawable()
             .load(item.image.original)
+            .override(
+                fragmentInfoBinding.ivShowsCoverPhoto.measuredWidth,
+                fragmentInfoBinding.ivShowsCoverPhoto.measuredHeight
+            )
             .error(R.drawable.baseline_local_movies_green_600_24dp)
             .into(fragmentInfoBinding.ivShowsCoverPhoto)
 
         Glide.with(requireContext())
-            .asDrawable()
             .load(item.image.medium)
+            .override(
+                fragmentInfoBinding.ivShowsCoverPoster.measuredWidth,
+                fragmentInfoBinding.ivShowsCoverPoster.measuredHeight
+            )
             .error(R.drawable.baseline_local_movies_green_600_24dp)
             .into(fragmentInfoBinding.ivShowsCoverPoster)
 

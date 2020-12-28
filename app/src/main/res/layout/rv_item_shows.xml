@@ -25,6 +25,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:adjustViewBounds="true"/>
 
+            <ProgressBar
+                android:id="@+id/item_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/rv_item_shows_poster"
+                app:layout_constraintStart_toStartOf="@+id/rv_item_shows_poster"
+                app:layout_constraintEnd_toEndOf="@id/rv_item_shows_poster"
+                app:layout_constraintBottom_toBottomOf="@id/rv_item_shows_poster"/>
+
             <TextView
                 android:id="@+id/rv_item_shows_name"
                 android:layout_width="0dp"
