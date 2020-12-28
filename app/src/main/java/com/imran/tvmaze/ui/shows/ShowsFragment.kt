@@ -131,7 +131,7 @@ class ShowsFragment : BaseFragment<FragmentShowsBinding>() {
             setPositiveButton("Yes") { dialog, which ->
                 // temporarily clear one item from the list
                 baseRecyclerAdapter.remove(item)
-            } // A null listener allows the button to dismiss the dialog and take no further action.
+            }
             setNegativeButton("No", null)
             setIcon(R.drawable.baseline_warning_red_900_24dp)
             show()
