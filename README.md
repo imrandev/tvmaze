@@ -2,7 +2,7 @@
 
 Coding Interview – Android App Developer
 
-Download APK - <a href="/app-debug.apk">Click here to download</a>
+Download APK - <a href="https://github.com/imrandev/tvmaze/blob/master/app-debug.apk?raw=true">Click here to download</a>
 
 # Technology
 * MVVM Architecture
