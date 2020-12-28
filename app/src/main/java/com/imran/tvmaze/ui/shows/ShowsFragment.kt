@@ -43,7 +43,6 @@ class ShowsFragment : BaseFragment<FragmentShowsBinding>() {
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
             adapter = baseRecyclerAdapter
         }
-
         // fetch shows from TVMaze API
         fetchShows()
     }
