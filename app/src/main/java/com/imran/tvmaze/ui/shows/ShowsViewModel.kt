@@ -20,17 +20,17 @@ class ShowsViewModel (application: Application) : AndroidViewModel(application) 
     var shows = MutableLiveData<Shows>()
 
     fun findShows() : MutableLiveData<Shows> {
-
-        if (shows.value != null)
+        shows.value?.let {
             return shows
-
-        viewModelScope.launch {
-            ShowsRepository.instance.findShows(context).collect { items ->
-                run {
-                    shows = items
+        } ?: let {
+            viewModelScope.launch {
+                ShowsRepository.instance.findShows(context).collect { items ->
+                    run {
+                        shows = items
+                    }
                 }
             }
+            return shows
         }
-        return shows
     }
 }
