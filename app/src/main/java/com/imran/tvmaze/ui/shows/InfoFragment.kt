@@ -14,7 +14,9 @@ import com.imran.tvmaze.model.Shows
 import com.imran.tvmaze.model.ShowsItem
 import com.imran.tvmaze.ui.base.BaseFragment
 import com.imran.tvmaze.utils.DateUtil
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InfoFragment : BaseFragment<FragmentInfoBinding>() {
 
     private lateinit var fragmentInfoBinding: FragmentInfoBinding

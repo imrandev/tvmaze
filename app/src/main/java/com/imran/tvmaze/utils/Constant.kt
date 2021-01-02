@@ -8,5 +8,5 @@ package com.imran.tvmaze.utils
 
 object Constant {
 
-    const val BASE_URL = "http://api.tvmaze.com"
+    const val TV_MAZE_BASE_URL = "http://api.tvmaze.com"
 }

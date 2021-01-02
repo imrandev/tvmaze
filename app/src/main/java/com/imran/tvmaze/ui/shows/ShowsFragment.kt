@@ -19,11 +19,12 @@ import com.imran.tvmaze.ui.adapter.BaseViewHolder
 import com.imran.tvmaze.ui.adapter.IBaseClickListener
 import com.imran.tvmaze.ui.base.BaseFragment
 import com.imran.tvmaze.ui.holder.ShowsRecyclerHolder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.withContext
 
-
+@AndroidEntryPoint
 class ShowsFragment : BaseFragment<FragmentShowsBinding>() {
 
     private lateinit var fragmentShowsBinding: FragmentShowsBinding

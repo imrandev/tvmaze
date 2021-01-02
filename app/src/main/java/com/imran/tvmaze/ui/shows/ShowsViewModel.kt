@@ -1,8 +1,8 @@
 package com.imran.tvmaze.ui.shows
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.imran.tvmaze.model.Shows
 import kotlinx.coroutines.flow.collect
@@ -13,9 +13,9 @@ import kotlinx.coroutines.launch
  * Email : context.imran@gmail.com
  */
 
-class ShowsViewModel (application: Application) : AndroidViewModel(application) {
+class ShowsViewModel @ViewModelInject constructor(
 
-    private val context = getApplication<Application>().applicationContext
+    private val showsRepository: ShowsRepository) : ViewModel() {
 
     var shows = MutableLiveData<Shows>()
 
@@ -24,7 +24,7 @@ class ShowsViewModel (application: Application) : AndroidViewModel(application) 
             return shows
         } ?: let {
             viewModelScope.launch {
-                ShowsRepository.instance.findShows(context).collect { items ->
+                showsRepository.findShows().collect { items ->
                     run {
                         shows = items
                     }
