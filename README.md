@@ -9,6 +9,8 @@ Download APK - <a href="https://github.com/imrandev/tvmaze/blob/master/app-debug
 * Retrofit with offline cache
 * Android Jetpack Navigation Component
 * Google Material Design
+* Hilt - Dagger Dependency
+* TVMaze API
 
 <img src="/screenshots/Screenshot_1609053036.png" height="640"/><span>
 <img src="/screenshots/Screenshot_1609053051.png" height="640"/></span>
