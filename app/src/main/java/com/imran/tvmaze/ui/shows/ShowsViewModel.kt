@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.imran.tvmaze.model.Shows
+import com.imran.tvmaze.model.ShowsItem
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -17,9 +18,9 @@ class ShowsViewModel @ViewModelInject constructor(
 
     private val showsRepository: ShowsRepository) : ViewModel() {
 
-    var shows = MutableLiveData<Shows>()
+    var shows = MutableLiveData<List<ShowsItem>>()
 
-    fun findShows() : MutableLiveData<Shows> {
+    fun findShows() : MutableLiveData<List<ShowsItem>> {
         shows.value?.let {
             return shows
         } ?: let {

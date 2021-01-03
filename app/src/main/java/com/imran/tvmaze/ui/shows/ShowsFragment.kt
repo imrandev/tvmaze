@@ -22,6 +22,7 @@ import com.imran.tvmaze.ui.holder.ShowsRecyclerHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
@@ -44,13 +45,18 @@ class ShowsFragment : BaseFragment<FragmentShowsBinding>() {
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
             adapter = baseRecyclerAdapter
         }
+
         // fetch shows from TVMaze API
         fetchShows()
     }
 
     private fun fetchShows() {
         showsViewModel.findShows().observe(viewLifecycleOwner){
-            baseRecyclerAdapter.update(it.toMutableList())
+            lifecycleScope.launch {
+                withContext(Dispatchers.Main){
+                    baseRecyclerAdapter.update(it.toMutableList())
+                }
+            }
         }
     }
 

@@ -41,6 +41,17 @@ abstract class BaseRecyclerAdapter<T, L : IBaseClickListener<T>?> protected cons
     }
 
     fun update(newItemList: MutableList<T>) {
+
+        if (itemList == null){
+            this.itemList = ArrayList()
+        }
+
+        if (newItemList.size > 0){
+            this.itemList?.clear()
+            this.itemList?.addAll(newItemList)
+        }
+        notifyDataSetChanged()
+
         val diffResult =
             itemList?.let {
                 DiffUtil.calculateDiff(object : DiffUtilItemCallback<T>(it, newItemList){
@@ -54,16 +65,6 @@ abstract class BaseRecyclerAdapter<T, L : IBaseClickListener<T>?> protected cons
                 })
             }
 
-        if (itemList == null){
-            this.itemList = ArrayList()
-        }
-
-        if (newItemList.size > 0){
-            this.itemList?.clear()
-            this.itemList?.addAll(newItemList)
-        }
-
-        notifyDataSetChanged()
         diffResult?.dispatchUpdatesTo(this)
     }
 
@@ -85,4 +86,9 @@ abstract class BaseRecyclerAdapter<T, L : IBaseClickListener<T>?> protected cons
     abstract fun onCreateEmptyView(parent: ViewGroup?, viewType: Int): BaseViewHolder<T, L>
     abstract fun areSameItems(oldItem: T?, newItem: T?): Boolean
     abstract fun areSameContents(oldItem: T?, newItem: T?): Boolean
+
+    override fun onViewRecycled(holder: BaseViewHolder<T, L>) {
+        super.onViewRecycled(holder)
+        holder.onViewRecycled()
+    }
 }

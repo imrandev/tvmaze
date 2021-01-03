@@ -8,5 +8,6 @@ package com.imran.tvmaze.utils
 
 object Constant {
 
+    const val DB_NAME = "tv-maze-db"
     const val TV_MAZE_BASE_URL = "http://api.tvmaze.com"
 }
