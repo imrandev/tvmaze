@@ -58,7 +58,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
         fragmentInfoBinding.tvShowsName.text = item.name
         fragmentInfoBinding.tvShowsRuntime.text = String.format("%s Minutes", item.runtime)
 
-        val avgRating = (item.rating.average / 10) * 5
+        val avgRating = ((item.rating?.average ?: 0.0) / 10) * 5
         fragmentInfoBinding.rbShowsRating.rating = avgRating.toFloat()
         val genres = item.genres.joinToString(", ")
         fragmentInfoBinding.tvShowsGenres.text = genres
@@ -80,13 +80,13 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
         }
         fragmentInfoBinding.tvShowsSummary.text = summaryText
 
-        val days = item.schedule.days.joinToString(" ,")
+        val days = item.schedule?.days?.joinToString(" ,")
 
         fragmentInfoBinding.tvShowsSchedule.text =
-            String.format("%s %s", days, DateUtil.getFormattedTime(item.schedule.time))
+            String.format("%s %s", days, item.schedule?.time?.let { DateUtil.getFormattedTime(it) })
 
         fragmentInfoBinding.tvShowsNetwork.text =
-            String.format("%s, %s", item.network?.name, item.network?.country.code)
+            String.format("%s, %s", item.network?.name, item.network?.country?.code)
     }
 
     override fun getLayoutRes(): Int {

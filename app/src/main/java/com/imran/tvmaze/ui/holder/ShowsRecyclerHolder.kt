@@ -1,6 +1,7 @@
 package com.imran.tvmaze.ui.holder
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
@@ -72,8 +73,10 @@ class ShowsRecyclerHolder (private val viewDataBinding: ViewDataBinding) : BaseV
 
         itemShowsBinding.rvItemShowsName.text = `object`.name
 
-        val avgRating = (`object`.rating.average / 10) * 5
-        itemShowsBinding.rvItemShowsRating.rating = avgRating.toFloat()
+        val avgRating = (`object`.rating?.average?.div(10))?.times(5)
+        if (avgRating != null) {
+            itemShowsBinding.rvItemShowsRating.rating = avgRating.toFloat()
+        }
         itemShowsBinding.rvItemShowsStatus.text = `object`.status
         val genres = `object`.genres.joinToString(", ")
         itemShowsBinding.rvItemShowsGenres.text = genres
@@ -83,7 +86,12 @@ class ShowsRecyclerHolder (private val viewDataBinding: ViewDataBinding) : BaseV
     }
 
     override fun onViewRecycled() {
-
+        Log.d(Companion.TAG, "onViewRecycled: ")
+        viewDataBinding.unbind()
+        viewDataBinding.invalidateAll()
     }
 
+    companion object {
+        private const val TAG = "ShowsRecyclerHolder"
+    }
 }
