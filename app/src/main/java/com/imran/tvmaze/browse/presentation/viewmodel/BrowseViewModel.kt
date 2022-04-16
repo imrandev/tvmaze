@@ -1,14 +1,10 @@
 package com.imran.tvmaze.browse.presentation.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.imran.tvmaze.browse.data.model.BrowseResponse
+import androidx.lifecycle.*
 import com.imran.tvmaze.browse.domain.usecase.BrowseUseCase
-import com.imran.tvmaze.core.utils.State
+import com.imran.tvmaze.core.network.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 /**
@@ -17,21 +13,13 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class BrowseViewModel @Inject constructor(application: Application, private val browseUseCase: BrowseUseCase) : AndroidViewModel(application) {
+class BrowseViewModel @Inject constructor(private val browseUseCase: BrowseUseCase) : ViewModel() {
 
-    private var browseTVList = MutableLiveData<State<BrowseResponse>>()
-
-    suspend fun findShows(page: String) : LiveData<State<BrowseResponse>> {
-        browseTVList.postValue(State.Loading)
-        browseUseCase.getTVUseCase.execute(page).collectLatest { state ->
-            when(state){
-                is State.Loaded -> browseTVList.postValue(state)
-                is State.Empty -> browseTVList.postValue(state)
-                else -> {
-
-                }
-            }
+    fun findShows(page: String) = liveData {
+        browseUseCase.getTVUseCase.execute(page).onStart {
+            emit(Result.loading())
+        }.collect { state ->
+            emit(state)
         }
-        return browseTVList
     }
 }

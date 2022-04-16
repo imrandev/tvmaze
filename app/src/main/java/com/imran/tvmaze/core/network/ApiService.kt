@@ -2,6 +2,7 @@ package com.imran.tvmaze.core.network
 
 import com.imran.tvmaze.browse.data.model.BrowseResponse
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,5 +14,5 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("/shows")
-    fun findShows(@Query("page") page : String): Call<BrowseResponse>
+    suspend fun findShows(@Query("page") page : String): Response<BrowseResponse>
 }

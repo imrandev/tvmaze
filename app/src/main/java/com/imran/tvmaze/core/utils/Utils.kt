@@ -1,5 +1,9 @@
 package com.imran.tvmaze.core.utils
 
+import com.imran.tvmaze.core.base.model.ErrorResponse
+import retrofit2.Response
+import retrofit2.Retrofit
+import java.io.IOException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,5 +40,17 @@ object DateUtil {
         val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
         val date = sdf.parse(actualDate)
         return formatted.format(date!!)
+    }
+}
+
+object ErrorUtils {
+
+    fun parseError(response: Response<*>, retrofit: Retrofit): ErrorResponse? {
+        val converter = retrofit.responseBodyConverter<ErrorResponse>(ErrorResponse::class.java, arrayOfNulls(0))
+        return try {
+            converter.convert(response.errorBody()!!)
+        } catch (e: IOException) {
+            ErrorResponse()
+        }
     }
 }

@@ -17,6 +17,8 @@ import com.imran.tvmaze.core.adapter.BaseViewHolder
 import com.imran.tvmaze.core.adapter.IBaseClickListener
 import com.imran.tvmaze.core.base.BaseFragment
 import com.imran.tvmaze.browse.presentation.viewholder.BrowseViewHolder
+import com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel
+import com.imran.tvmaze.core.network.Result
 import com.imran.tvmaze.core.utils.State
 import com.imran.tvmaze.databinding.FragmentBrowseBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +35,7 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
     private lateinit var baseRecyclerAdapter: BaseRecyclerAdapter<BrowseItem, IBaseClickListener<BrowseItem>>
 
     @Inject
-    lateinit var browseViewModel : BrowseViewHolder
+    lateinit var browseViewModel : BrowseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,18 +50,19 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
             adapter = baseRecyclerAdapter
         }
+
         // fetch shows from TVMaze API
         fetchShows("1")
     }
 
     private fun fetchShows(page: String) {
-        CoroutineScope(Dispatchers.Main).launch {
-            browseViewModel.findShows(page = page).observe(viewLifecycleOwner){ state ->
-                when (state){
-                    is State.Loaded ->  baseRecyclerAdapter.update(state.data)
-                    else -> {
+        browseViewModel.findShows(page = page).observe(this){ result ->
+            when (result.status){
+                Result.Status.SUCCESS -> {
+                    baseRecyclerAdapter.update(result.data!!)
+                }
+                else -> {
 
-                    }
                 }
             }
         }

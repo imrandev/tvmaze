@@ -87,9 +87,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideBrowseRepository(apiService: ApiService) = BrowseRepositoryImpl(apiService)
+    fun provideBrowseRepository(apiService: ApiService, retrofit: Retrofit) : BrowseRepository = BrowseRepositoryImpl(apiService, retrofit)
 
     @Provides
     @Singleton
-    fun provideBrowseUseCase(browseRepository: BrowseRepository) = BrowseUseCase(browseRepository)
+    fun provideBrowseUseCase(browseRepository: BrowseRepository) : BrowseUseCase = BrowseUseCase(browseRepository)
 }
