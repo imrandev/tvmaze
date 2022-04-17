@@ -9,4 +9,7 @@ package com.imran.tvmaze.core.utils
 object Constant {
 
     const val BASE_URL = "http://api.tvmaze.com"
+
+    const val DEFAULT_GET_ERROR_MESSAGE = "Unable to fetch data"
+    const val cacheSize = (5 * 1024 * 1024).toLong()
 }

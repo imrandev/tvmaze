@@ -7,10 +7,11 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.imran.tvmaze.BuildConfig
 import com.imran.tvmaze.browse.data.repository.BrowseRepositoryImpl
+import com.imran.tvmaze.browse.data.source.BrowseDataSource
 import com.imran.tvmaze.browse.domain.repository.BrowseRepository
 import com.imran.tvmaze.browse.domain.usecase.BrowseUseCase
 import com.imran.tvmaze.core.network.ApiService
-import com.imran.tvmaze.core.network.RetrofitClient
+import com.imran.tvmaze.core.utils.Constant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,15 +30,15 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideBaseUrl() = BuildConfig.BASE_URL
+    fun provideBaseUrl() : String = BuildConfig.BASE_URL
 
     @Provides
     @Singleton
-    fun provideGson() = GsonBuilder().setLenient().create()
+    fun provideGson() : Gson = GsonBuilder().setLenient().create()
 
     @Provides
     @Singleton
-    fun provideCache(@ApplicationContext context: Context) = Cache(context.cacheDir, RetrofitClient.cacheSize)
+    fun provideCache(@ApplicationContext context: Context) : Cache = Cache(context.cacheDir, Constant.cacheSize)
 
     @Provides
     @Singleton
@@ -87,7 +88,11 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideBrowseRepository(apiService: ApiService, retrofit: Retrofit) : BrowseRepository = BrowseRepositoryImpl(apiService, retrofit)
+    fun provideBrowseDataSource(apiService: ApiService, retrofit: Retrofit) : BrowseDataSource = BrowseDataSource(apiService, retrofit)
+
+    @Provides
+    @Singleton
+    fun provideBrowseRepository(browseDataSource: BrowseDataSource) : BrowseRepository = BrowseRepositoryImpl(browseDataSource)
 
     @Provides
     @Singleton
