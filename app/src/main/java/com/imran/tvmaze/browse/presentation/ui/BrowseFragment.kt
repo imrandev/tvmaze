@@ -19,12 +19,8 @@ import com.imran.tvmaze.core.base.BaseFragment
 import com.imran.tvmaze.browse.presentation.viewholder.BrowseViewHolder
 import com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel
 import com.imran.tvmaze.core.network.Result
-import com.imran.tvmaze.core.utils.State
 import com.imran.tvmaze.databinding.FragmentBrowseBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -52,11 +48,11 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         }
 
         // fetch shows from TVMaze API
-        fetchShows("1")
+        fetchTVShows()
     }
 
-    private fun fetchShows(page: String) {
-        browseViewModel.findShows(page = page).observe(this){ result ->
+    private fun fetchTVShows() {
+        browseViewModel.findShows(page = "1").observe(viewLifecycleOwner){ result ->
             when (result.status){
                 Result.Status.SUCCESS -> {
                     baseRecyclerAdapter.update(result.data!!)
@@ -71,7 +67,7 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
     private fun initAdapter() {
         baseRecyclerAdapter = object : BaseRecyclerAdapter<BrowseItem, IBaseClickListener<BrowseItem>>(
             null,
-            showItemClickListener
+            tvItemClickListener
         ){
             override fun onCreateView(
                 parent: ViewGroup?,
@@ -113,9 +109,8 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         this.fragmentBrowseBinding = viewBinding
     }
 
-    val showItemClickListener = object : IBaseClickListener<BrowseItem> {
+    val tvItemClickListener = object : IBaseClickListener<BrowseItem> {
         override fun onItemClicked(view: View?, item: BrowseItem, position: Int) {
-
             when(view!!.id){
                 R.id.rv_item_clear -> {
                     openAlertDialog(item)
@@ -143,7 +138,7 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         alertDialog.apply {
             setTitle("Delete ${item.name}")
             setMessage("Do you really want to remove the entry from the list?")
-            setPositiveButton("Yes") { dialog, which ->
+            setPositiveButton("Yes") { _, _ ->
                 // temporarily clear one item from the list
                 baseRecyclerAdapter.remove(item)
             }
@@ -154,6 +149,6 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
     }
 
     companion object {
-        private const val TAG = "ShowsFragment"
+        private const val TAG = "BrowseFragment"
     }
 }
