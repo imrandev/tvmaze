@@ -36,11 +36,10 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
         `object`: Show,
         onItemClickedListener: IBaseClickListener<Show>
     ) {
-
         val itemShowsBinding = viewDataBinding as RvItemBrowseBinding
-
+        val mediumImage = if (`object`.image != null) `object`.image.medium else null
         Glide.with(itemView)
-            .load(`object`.image.medium)
+            .load(mediumImage)
             .override(
                 itemShowsBinding.rvItemShowsPoster.measuredWidth,
                 itemShowsBinding.rvItemShowsPoster.measuredHeight
@@ -72,10 +71,12 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
 
         itemShowsBinding.rvItemShowsName.text = `object`.name
 
-        val avgRating = (`object`.rating.average / 10) * 5
-        itemShowsBinding.rvItemShowsRating.rating = avgRating.toFloat()
+        val avgRating = (`object`.rating.average?.div(10))?.times(5)
+        if (avgRating != null) {
+            itemShowsBinding.rvItemShowsRating.rating = avgRating.toFloat()
+        }
         itemShowsBinding.rvItemShowsStatus.text = `object`.status
-        val genres = `object`.genres.joinToString(", ")
+        val genres = `object`.genres?.joinToString(", ")
         itemShowsBinding.rvItemShowsGenres.text = genres
 
         attachListenerWithCustomView(itemShowsBinding.rvItemForwardToDetails , onItemClickedListener, `object`)

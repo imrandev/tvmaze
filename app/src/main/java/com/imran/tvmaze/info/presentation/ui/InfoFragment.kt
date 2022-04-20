@@ -32,7 +32,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
     private fun populateShowsInfo() {
 
         Glide.with(requireContext())
-            .load(item.image.original)
+            .load(item.image?.original)
             .override(
                 fragmentInfoBinding.ivShowsCoverPhoto.measuredWidth,
                 fragmentInfoBinding.ivShowsCoverPhoto.measuredHeight
@@ -41,7 +41,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
             .into(fragmentInfoBinding.ivShowsCoverPhoto)
 
         Glide.with(requireContext())
-            .load(item.image.medium)
+            .load(item.image?.medium)
             .override(
                 fragmentInfoBinding.ivShowsCoverPoster.measuredWidth,
                 fragmentInfoBinding.ivShowsCoverPoster.measuredHeight
@@ -52,15 +52,17 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
         fragmentInfoBinding.tvShowsName.text = item.name
         fragmentInfoBinding.tvShowsRuntime.text = String.format("%s Minutes", item.runtime)
 
-        val avgRating = (item.rating.average / 10) * 5
-        fragmentInfoBinding.rbShowsRating.rating = avgRating.toFloat()
-        val genres = item.genres.joinToString(", ")
+        val avgRating = (item.rating.average?.div(10))?.times(5)
+        if (avgRating != null) {
+            fragmentInfoBinding.rbShowsRating.rating = avgRating.toFloat()
+        }
+        val genres = item.genres?.joinToString(", ")
         fragmentInfoBinding.tvShowsGenres.text = genres
 
         fragmentInfoBinding.tvShowsType.text = item.type
         fragmentInfoBinding.tvShowsStatus.text = item.status
         fragmentInfoBinding.tvShowsLang.text = item.language
-        fragmentInfoBinding.tvShowsPremiered.text = DateUtil.getFormattedDate(item.premiered)
+        fragmentInfoBinding.tvShowsPremiered.text = DateUtil.getFormattedDate(item.premiered!!)
 
         val summaryText = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             String.format(
@@ -74,13 +76,13 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
         }
         fragmentInfoBinding.tvShowsSummary.text = summaryText
 
-        val days = item.schedule.days.joinToString(" ,")
+        val days = item.schedule?.days?.joinToString(" ,")
 
         fragmentInfoBinding.tvShowsSchedule.text =
-            String.format("%s %s", days, DateUtil.getFormattedTime(item.schedule.time))
+            String.format("%s %s", days, item.schedule?.time?.let { DateUtil.getFormattedTime(it) })
 
         fragmentInfoBinding.tvShowsNetwork.text =
-            String.format("%s, %s", item.network?.name, item.network?.country.code)
+            String.format("%s, %s", item.network?.name, item.network?.country?.code)
     }
 
     override fun getLayoutRes(): Int {

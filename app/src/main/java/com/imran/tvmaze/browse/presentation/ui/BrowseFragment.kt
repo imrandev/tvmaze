@@ -1,16 +1,19 @@
 package com.imran.tvmaze.browse.presentation.ui
 
 import android.app.AlertDialog
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.imran.tvmaze.R
+import com.imran.tvmaze.browse.presentation.utils.WrapContentLinearLayoutManager
 import com.imran.tvmaze.core.base.model.Show
 import com.imran.tvmaze.core.adapter.BaseRecyclerAdapter
 import com.imran.tvmaze.core.adapter.BaseViewHolder
@@ -30,23 +33,53 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
 
     private lateinit var baseRecyclerAdapter: BaseRecyclerAdapter<Show, IBaseClickListener<Show>>
 
+    private lateinit var searchView: SearchView
+
     @Inject
     lateinit var browseViewModel : BrowseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         initAdapter()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_browse, menu)
+
+        val menuItem = menu.findItem(R.id.action_menu_search)
+        searchView = menuItem.actionView as SearchView
+        searchView.queryHint = "Search TV Shows"
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    browseViewModel.searchShows(query = query).observe(viewLifecycleOwner){
+                        when (it.status){
+                            Result.Status.SUCCESS -> {
+                                baseRecyclerAdapter.update(it.data!!)
+                            }
+                            else -> {}
+                        }
+                    }
+                }
+                return true;
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         fragmentBrowseBinding.rvShows.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = WrapContentLinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
             adapter = baseRecyclerAdapter
         }
-
         // fetch shows from TVMaze API
         fetchTVShows()
     }
@@ -57,16 +90,14 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
                 Result.Status.SUCCESS -> {
                     baseRecyclerAdapter.update(result.data!!)
                 }
-                else -> {
-
-                }
+                else -> {}
             }
         }
     }
 
     private fun initAdapter() {
         baseRecyclerAdapter = object : BaseRecyclerAdapter<Show, IBaseClickListener<Show>>(
-            null,
+            mutableListOf(),
             tvItemClickListener
         ){
             override fun onCreateView(
@@ -77,14 +108,6 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
                         LayoutInflater.from(parent?.context), R.layout.rv_item_browse, parent, false
                     )
                 )
-            }
-
-            override fun areSameItems(oldItem: Show?, newItem: Show?): Boolean {
-                return oldItem?.id == newItem?.id
-            }
-
-            override fun areSameContents(oldItem: Show?, newItem: Show?): Boolean {
-                return oldItem == newItem
             }
 
             override fun onCreateEmptyView(
@@ -109,7 +132,7 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         this.fragmentBrowseBinding = viewBinding
     }
 
-    val tvItemClickListener = object : IBaseClickListener<Show> {
+    private val tvItemClickListener = object : IBaseClickListener<Show> {
         override fun onItemClicked(view: View?, item: Show, position: Int) {
             when(view!!.id){
                 R.id.rv_item_clear -> {
@@ -123,7 +146,7 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
                     extras.putSerializable("data", item)
                     extras.putString("title", item.name)
                     val navController = Navigation.findNavController(
-                        activity!!,
+                        requireActivity(),
                         R.id.navHostFragment
                     )
                     navController.navigate(R.id.action_showsFragment_to_infoFragment, extras)

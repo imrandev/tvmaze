@@ -32,7 +32,7 @@ abstract class BaseViewHolder<T, L : IBaseClickListener<T>?>(viewDataBinding: Vi
             onItemClickListener!!.onItemClicked(
                 view1,
                 item,
-                adapterPosition
+                absoluteAdapterPosition
             )
         }
     }
