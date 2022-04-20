@@ -7,7 +7,7 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.imran.tvmaze.R
 import com.imran.tvmaze.databinding.FragmentInfoBinding
-import com.imran.tvmaze.browse.data.model.BrowseItem
+import com.imran.tvmaze.core.base.model.Show
 import com.imran.tvmaze.core.base.BaseFragment
 import com.imran.tvmaze.core.utils.DateUtil
 
@@ -15,12 +15,12 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
 
     private lateinit var fragmentInfoBinding: FragmentInfoBinding
 
-    private lateinit var item: BrowseItem
+    private lateinit var item: Show
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            item = it.getSerializable("data") as BrowseItem
+            item = it.getSerializable("data") as Show
         }
     }
 

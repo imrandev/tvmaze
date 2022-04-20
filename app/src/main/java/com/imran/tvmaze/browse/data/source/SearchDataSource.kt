@@ -1,6 +1,6 @@
 package com.imran.tvmaze.browse.data.source
 
-import com.imran.tvmaze.browse.data.model.BrowseResponse
+import com.imran.tvmaze.browse.data.model.SearchResponse
 import com.imran.tvmaze.core.network.ApiService
 import com.imran.tvmaze.core.network.DataSource
 import com.imran.tvmaze.core.network.Result
@@ -10,19 +10,19 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class BrowseDataSource @Inject constructor(
+class SearchDataSource @Inject constructor(
     private val apiService: ApiService, private val retrofit: Retrofit
-) : DataSource<BrowseResponse> {
+) : DataSource<SearchResponse> {
 
-    suspend fun fetchShows(page: String) = fetch(
-        request = {apiService.findShows(page)},
+    suspend fun search(query: String) = fetch(
+        request = {apiService.searchShows(query)},
         defaultErrorMessage = Constant.DEFAULT_GET_ERROR_MESSAGE
     )
 
     override suspend fun fetch(
-        request: suspend () -> Response<BrowseResponse>,
+        request: suspend () -> Response<SearchResponse>,
         defaultErrorMessage: String
-    ): Result<BrowseResponse> {
+    ): Result<SearchResponse> {
         return try {
             println("I'm working in thread ${Thread.currentThread().name}")
             val result = request.invoke()

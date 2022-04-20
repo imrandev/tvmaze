@@ -3,7 +3,7 @@ package com.imran.tvmaze.core.base.model
 import java.io.Serializable
 
 data class Externals(
-    val imdb: Any,
-    val thetvdb: Any,
+    val imdb: String,
+    val thetvdb: Int,
     val tvrage: Int
 ) : Serializable

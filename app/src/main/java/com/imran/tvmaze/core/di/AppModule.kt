@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder
 import com.imran.tvmaze.BuildConfig
 import com.imran.tvmaze.browse.data.repository.BrowseRepositoryImpl
 import com.imran.tvmaze.browse.data.source.BrowseDataSource
+import com.imran.tvmaze.browse.data.source.SearchDataSource
 import com.imran.tvmaze.browse.domain.repository.BrowseRepository
 import com.imran.tvmaze.browse.domain.usecase.BrowseUseCase
 import com.imran.tvmaze.core.network.ApiService
@@ -63,7 +64,6 @@ class AppModule {
             .build()
     } else OkHttpClient.Builder().build()
 
-
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson, BASE_URL: String): Retrofit =
@@ -92,7 +92,11 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideBrowseRepository(browseDataSource: BrowseDataSource) : BrowseRepository = BrowseRepositoryImpl(browseDataSource)
+    fun provideSearchDataSource(apiService: ApiService, retrofit: Retrofit) : SearchDataSource = SearchDataSource(apiService, retrofit)
+
+    @Provides
+    @Singleton
+    fun provideBrowseRepository(browseDataSource: BrowseDataSource, searchDataSource: SearchDataSource) : BrowseRepository = BrowseRepositoryImpl(browseDataSource, searchDataSource)
 
     @Provides
     @Singleton

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.imran.tvmaze.R
-import com.imran.tvmaze.browse.data.model.BrowseItem
+import com.imran.tvmaze.core.base.model.Show
 import com.imran.tvmaze.core.adapter.BaseRecyclerAdapter
 import com.imran.tvmaze.core.adapter.BaseViewHolder
 import com.imran.tvmaze.core.adapter.IBaseClickListener
@@ -28,7 +28,7 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
 
     private lateinit var fragmentBrowseBinding: FragmentBrowseBinding
 
-    private lateinit var baseRecyclerAdapter: BaseRecyclerAdapter<BrowseItem, IBaseClickListener<BrowseItem>>
+    private lateinit var baseRecyclerAdapter: BaseRecyclerAdapter<Show, IBaseClickListener<Show>>
 
     @Inject
     lateinit var browseViewModel : BrowseViewModel
@@ -65,13 +65,13 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
     }
 
     private fun initAdapter() {
-        baseRecyclerAdapter = object : BaseRecyclerAdapter<BrowseItem, IBaseClickListener<BrowseItem>>(
+        baseRecyclerAdapter = object : BaseRecyclerAdapter<Show, IBaseClickListener<Show>>(
             null,
             tvItemClickListener
         ){
             override fun onCreateView(
                 parent: ViewGroup?,
-                viewType: Int): BaseViewHolder<BrowseItem, IBaseClickListener<BrowseItem>> {
+                viewType: Int): BaseViewHolder<Show, IBaseClickListener<Show>> {
                 return BrowseViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent?.context), R.layout.rv_item_browse, parent, false
@@ -79,18 +79,18 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
                 )
             }
 
-            override fun areSameItems(oldItem: BrowseItem?, newItem: BrowseItem?): Boolean {
+            override fun areSameItems(oldItem: Show?, newItem: Show?): Boolean {
                 return oldItem?.id == newItem?.id
             }
 
-            override fun areSameContents(oldItem: BrowseItem?, newItem: BrowseItem?): Boolean {
+            override fun areSameContents(oldItem: Show?, newItem: Show?): Boolean {
                 return oldItem == newItem
             }
 
             override fun onCreateEmptyView(
                 parent: ViewGroup?,
                 viewType: Int
-            ): BaseViewHolder<BrowseItem, IBaseClickListener<BrowseItem>> {
+            ): BaseViewHolder<Show, IBaseClickListener<Show>> {
                 return BrowseViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent?.context), R.layout.rv_item_empty, parent, false
@@ -109,8 +109,8 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         this.fragmentBrowseBinding = viewBinding
     }
 
-    val tvItemClickListener = object : IBaseClickListener<BrowseItem> {
-        override fun onItemClicked(view: View?, item: BrowseItem, position: Int) {
+    val tvItemClickListener = object : IBaseClickListener<Show> {
+        override fun onItemClicked(view: View?, item: Show, position: Int) {
             when(view!!.id){
                 R.id.rv_item_clear -> {
                     openAlertDialog(item)
@@ -133,7 +133,7 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         }
     }
 
-    private fun openAlertDialog(item: BrowseItem) {
+    private fun openAlertDialog(item: Show) {
         val alertDialog = AlertDialog.Builder(context, R.style.MazeAlertDialogTheme)
         alertDialog.apply {
             setTitle("Delete ${item.name}")

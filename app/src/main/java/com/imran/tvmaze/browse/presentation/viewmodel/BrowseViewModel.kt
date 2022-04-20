@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.imran.tvmaze.browse.domain.usecase.BrowseUseCase
 import com.imran.tvmaze.core.network.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
@@ -19,6 +20,14 @@ class BrowseViewModel @Inject constructor(private val browseUseCase: BrowseUseCa
         browseUseCase.getTVUseCase.execute(page).onStart {
             emit(Result.loading())
         }.collect { state ->
+            emit(state)
+        }
+    }
+
+    fun searchShows(query: String) = liveData {
+        browseUseCase.searchTVUseCase.execute(query).onStart {
+            emit(Result.loading())
+        }.collect{ state ->
             emit(state)
         }
     }

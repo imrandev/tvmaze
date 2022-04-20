@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.imran.tvmaze.R
 import com.imran.tvmaze.databinding.RvItemEmptyBinding
-import com.imran.tvmaze.browse.data.model.BrowseItem
+import com.imran.tvmaze.core.base.model.Show
 import com.imran.tvmaze.core.adapter.BaseViewHolder
 import com.imran.tvmaze.core.adapter.IBaseClickListener
 import com.imran.tvmaze.databinding.RvItemBrowseBinding
@@ -20,7 +20,7 @@ import com.imran.tvmaze.databinding.RvItemBrowseBinding
  * Email : context.imran@gmail.com
  */
 
-class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseViewHolder<BrowseItem, IBaseClickListener<BrowseItem>>(viewDataBinding) {
+class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseViewHolder<Show, IBaseClickListener<Show>>(viewDataBinding) {
 
     override fun onBindView(isEmpty : Boolean) {
         val itemShowsBinding = viewDataBinding as RvItemEmptyBinding
@@ -28,13 +28,13 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
         itemShowsBinding.rvNoInternetAlert.visibility = if (isEmpty) View.VISIBLE else View.GONE
     }
 
-    override fun onBindView(`object`: BrowseItem) {
+    override fun onBindView(`object`: Show) {
 
     }
 
     override fun onBindView(
-        `object`: BrowseItem,
-        onItemClickedListener: IBaseClickListener<BrowseItem>
+        `object`: Show,
+        onItemClickedListener: IBaseClickListener<Show>
     ) {
 
         val itemShowsBinding = viewDataBinding as RvItemBrowseBinding
