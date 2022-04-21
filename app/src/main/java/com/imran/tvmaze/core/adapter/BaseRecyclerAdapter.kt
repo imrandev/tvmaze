@@ -40,25 +40,12 @@ abstract class BaseRecyclerAdapter<T : Core, L : IBaseClickListener<T>?> protect
     }
 
     fun update(newItemList: List<T>) {
-
         val diffResult = DiffUtil.calculateDiff(DiffUtilItemCallback(itemList, newItemList))
-        itemList = newItemList.toMutableList()
-
+        itemList.addAll(newItemList)
         if (newItemList.isNotEmpty()){
             val start = if (itemList.isEmpty()) 0 else itemList.size - 1
             notifyItemRangeChanged(start, newItemList.size)
         }
-
-        /*if (itemList == null){
-            this.itemList = ArrayList()
-        }
-
-        if (newItemList.isNotEmpty()){
-            this.itemList?.clear()
-            this.itemList?.addAll(newItemList)
-        }
-
-        notifyDataSetChanged()*/
         diffResult.dispatchUpdatesTo(this)
     }
 

@@ -1,13 +1,10 @@
 package com.imran.tvmaze.browse.presentation.ui
 
 import android.app.AlertDialog
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +18,7 @@ import com.imran.tvmaze.core.adapter.IBaseClickListener
 import com.imran.tvmaze.core.base.BaseFragment
 import com.imran.tvmaze.browse.presentation.viewholder.BrowseViewHolder
 import com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel
+import com.imran.tvmaze.core.adapter.RecyclerPagination
 import com.imran.tvmaze.core.network.Result
 import com.imran.tvmaze.databinding.FragmentBrowseBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -79,16 +77,22 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
             layoutManager = WrapContentLinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
             adapter = baseRecyclerAdapter
+            setOnScrollListener(RecyclerPagination(onLoadMore = { page, scrollPosition ->
+                fetchTVShows(page, scrollPosition)
+            }))
         }
         // fetch shows from TVMaze API
-        fetchTVShows()
+        fetchTVShows(0, 0)
     }
 
-    private fun fetchTVShows() {
-        browseViewModel.findShows(page = "1").observe(viewLifecycleOwner){ result ->
+    private fun fetchTVShows(page: Int, scrollPosition: Int) {
+        browseViewModel.findShows(page = "$page").observe(viewLifecycleOwner){ result ->
             when (result.status){
                 Result.Status.SUCCESS -> {
                     baseRecyclerAdapter.update(result.data!!)
+                    if (scrollPosition > 0){
+                        fragmentBrowseBinding.rvShows.scrollToPosition(scrollPosition)
+                    }
                 }
                 else -> {}
             }
