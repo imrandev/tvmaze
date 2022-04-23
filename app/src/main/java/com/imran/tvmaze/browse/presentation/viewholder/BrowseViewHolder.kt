@@ -9,7 +9,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.imran.tvmaze.R
-import com.imran.tvmaze.databinding.RvItemEmptyBinding
 import com.imran.tvmaze.core.base.model.Show
 import com.imran.tvmaze.core.adapter.BaseViewHolder
 import com.imran.tvmaze.core.adapter.IBaseClickListener
@@ -22,22 +21,21 @@ import com.imran.tvmaze.databinding.RvItemBrowseBinding
 
 class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseViewHolder<Show, IBaseClickListener<Show>>(viewDataBinding) {
 
-    override fun onBindView(isEmpty : Boolean) {
-        val itemShowsBinding = viewDataBinding as RvItemEmptyBinding
-        itemShowsBinding.rvItemProgress.visibility = if (isEmpty) View.GONE else View.VISIBLE
-        itemShowsBinding.rvNoInternetAlert.visibility = if (isEmpty) View.VISIBLE else View.GONE
-    }
-
-    override fun onBindView(`object`: Show) {
+    override fun onViewRecycled() {
 
     }
 
-    override fun onBindView(
-        `object`: Show,
-        onItemClickedListener: IBaseClickListener<Show>
-    ) {
+    override fun onEmptyBind() {
+
+    }
+
+    override fun onLoadedBind(item: Show) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLoadedBind(item: Show, onItemClickedListener: IBaseClickListener<Show>) {
         val itemShowsBinding = viewDataBinding as RvItemBrowseBinding
-        val mediumImage = if (`object`.image != null) `object`.image.medium else null
+        val mediumImage = if (item.image != null) item.image.medium else null
         Glide.with(itemView)
             .load(mediumImage)
             .override(
@@ -54,7 +52,6 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
                     itemShowsBinding.itemProgressBar.visibility = View.GONE
                     return false
                 }
-
                 override fun onResourceReady(
                     resource: Drawable?,
                     model: Any?,
@@ -69,22 +66,25 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
             .error(R.drawable.baseline_local_movies_green_600_24dp)
             .into(itemShowsBinding.rvItemShowsPoster)
 
-        itemShowsBinding.rvItemShowsName.text = `object`.name
+        itemShowsBinding.rvItemShowsName.text = item.name
 
-        val avgRating = (`object`.rating.average?.div(10))?.times(5)
+        val avgRating = (item.rating.average?.div(10))?.times(5)
         if (avgRating != null) {
             itemShowsBinding.rvItemShowsRating.rating = avgRating.toFloat()
         }
-        itemShowsBinding.rvItemShowsStatus.text = `object`.status
-        val genres = `object`.genres?.joinToString(", ")
+        itemShowsBinding.rvItemShowsStatus.text = item.status
+        val genres = item.genres?.joinToString(", ")
         itemShowsBinding.rvItemShowsGenres.text = genres
 
-        attachListenerWithCustomView(itemShowsBinding.rvItemForwardToDetails , onItemClickedListener, `object`)
-        attachListenerWithCustomView(itemShowsBinding.rvItemClear , onItemClickedListener, `object`)
+        setChildViewListener(itemShowsBinding.rvItemForwardToDetails , onItemClickedListener, item)
+        //attachListenerWithCustomView(itemShowsBinding.rvItemClear , onItemClickedListener, item)
     }
 
-    override fun onViewRecycled() {
-
+    override fun onLoadingBind() {
+        TODO("Not yet implemented")
     }
 
+    override fun onInfiniteLoadingBind() {
+        TODO("Not yet implemented")
+    }
 }

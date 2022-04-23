@@ -5,25 +5,27 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
 
-abstract class BaseViewHolder<T, L : IBaseClickListener<T>?>(viewDataBinding: ViewDataBinding) :
-    RecyclerView.ViewHolder(viewDataBinding.root) {
+abstract class BaseViewHolder<T, L : IBaseClickListener<T>?>(
+    viewDataBinding: ViewDataBinding) : RecyclerView.ViewHolder(viewDataBinding.root) {
 
-    abstract fun onBindView(isEmpty: Boolean)
-    abstract fun onBindView(`object`: T)
-    abstract fun onBindView(`object`: T, onItemClickedListener: L)
+    abstract fun onEmptyBind()
+    abstract fun onLoadedBind(item: T)
+    abstract fun onLoadedBind(item: T, onItemClickedListener: L)
+    abstract fun onLoadingBind()
+    abstract fun onInfiniteLoadingBind()
     abstract fun onViewRecycled()
 
-    fun attachListener(onItemClickListener: L, item: T) {
+    fun setParentViewListener(onItemClickListener: L, item: T) {
         itemView.setOnClickListener { view: View? ->
             onItemClickListener!!.onItemClicked(
                 view,
                 item,
-                adapterPosition
+                absoluteAdapterPosition
             )
         }
     }
 
-    protected fun attachListenerWithCustomView(
+    protected fun setChildViewListener(
         view: View,
         onItemClickListener: L,
         item: T

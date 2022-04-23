@@ -8,6 +8,7 @@ package com.imran.tvmaze.core.utils
 
 object Constant {
 
+    const val DB_NAME: String = "tvmaze-db"
     const val BASE_URL = "http://api.tvmaze.com"
 
     const val DEFAULT_GET_ERROR_MESSAGE = "Unable to fetch data"

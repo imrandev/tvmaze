@@ -2,10 +2,11 @@ package com.imran.tvmaze.browse.presentation.viewmodel
 
 import androidx.lifecycle.*
 import com.imran.tvmaze.browse.domain.usecase.BrowseUseCase
+import com.imran.tvmaze.core.base.model.Show
 import com.imran.tvmaze.core.network.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -16,19 +17,33 @@ import javax.inject.Inject
 @HiltViewModel
 class BrowseViewModel @Inject constructor(private val browseUseCase: BrowseUseCase) : ViewModel() {
 
-    fun findShows(page: String) = liveData {
-        browseUseCase.getTVUseCase.execute(page).onStart {
-            emit(Result.loading())
-        }.collect { state ->
-            emit(state)
+    val tvShowList = MutableLiveData<Result<List<Show>>>()
+
+    val isTVSearched = MutableLiveData<Boolean>()
+
+    fun findShows(page: String): LiveData<Result<List<Show>>> {
+        viewModelScope.launch {
+            browseUseCase.getTVUseCase.execute(page).onStart {
+                tvShowList.postValue(Result.loading())
+            }.collect{
+                tvShowList.postValue(it)
+            }
         }
+        return tvShowList
     }
 
-    fun searchShows(query: String) = liveData {
-        browseUseCase.searchTVUseCase.execute(query).onStart {
-            emit(Result.loading())
-        }.collect{ state ->
-            emit(state)
+    fun searchShows(query: String): LiveData<Result<List<Show>>> {
+        viewModelScope.launch {
+            browseUseCase.searchTVUseCase.execute(query).onStart {
+                tvShowList.postValue(Result.loading())
+            }.collect{
+                tvShowList.postValue(it)
+            }
         }
+        return tvShowList
+    }
+
+    fun setTvSearch(state: Boolean){
+        isTVSearched.postValue(state)
     }
 }

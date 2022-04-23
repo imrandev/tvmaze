@@ -11,6 +11,7 @@ sealed class State<out R> {
             is Loaded<*> -> "Success[data=$data]"
             is Empty -> "Empty[message=$message]"
             is Loading -> "Loading"
+            else -> ""
         }
     }
 }

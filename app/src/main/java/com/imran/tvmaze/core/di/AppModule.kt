@@ -3,6 +3,7 @@ package com.imran.tvmaze.core.di
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.imran.tvmaze.BuildConfig
@@ -11,6 +12,7 @@ import com.imran.tvmaze.browse.data.source.BrowseDataSource
 import com.imran.tvmaze.browse.data.source.SearchDataSource
 import com.imran.tvmaze.browse.domain.repository.BrowseRepository
 import com.imran.tvmaze.browse.domain.usecase.BrowseUseCase
+import com.imran.tvmaze.core.db.RoomService
 import com.imran.tvmaze.core.network.ApiService
 import com.imran.tvmaze.core.utils.Constant
 import dagger.Module
@@ -96,9 +98,14 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideBrowseRepository(browseDataSource: BrowseDataSource, searchDataSource: SearchDataSource) : BrowseRepository = BrowseRepositoryImpl(browseDataSource, searchDataSource)
+    fun provideBrowseRepository(browseDataSource: BrowseDataSource, searchDataSource: SearchDataSource): BrowseRepository = BrowseRepositoryImpl(browseDataSource, searchDataSource)
 
     @Provides
     @Singleton
     fun provideBrowseUseCase(browseRepository: BrowseRepository) : BrowseUseCase = BrowseUseCase(browseRepository)
+
+    @Provides
+    @Singleton
+    fun provideRoomService(@ApplicationContext context: Context) :
+            RoomService = Room.databaseBuilder(context, RoomService::class.java, Constant.DB_NAME).build()
 }

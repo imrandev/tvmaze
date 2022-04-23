@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.imran.tvmaze.R
 import com.imran.tvmaze.databinding.FragmentInfoBinding
@@ -12,8 +13,6 @@ import com.imran.tvmaze.core.base.BaseFragment
 import com.imran.tvmaze.core.utils.DateUtil
 
 class InfoFragment : BaseFragment<FragmentInfoBinding>() {
-
-    private lateinit var fragmentInfoBinding: FragmentInfoBinding
 
     private lateinit var item: Show
 
@@ -24,12 +23,11 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        populateShowsInfo()
+    override fun onViewCreated(viewBinding: FragmentInfoBinding?, savedInstanceState: Bundle?) {
+        populateShowsInfo(viewBinding!!)
     }
 
-    private fun populateShowsInfo() {
+    private fun populateShowsInfo(fragmentInfoBinding : FragmentInfoBinding) {
 
         Glide.with(requireContext())
             .load(item.image?.original)
@@ -87,9 +85,5 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_info
-    }
-
-    override fun intViewBinding(viewBinding: FragmentInfoBinding) {
-        this.fragmentInfoBinding = viewBinding
     }
 }

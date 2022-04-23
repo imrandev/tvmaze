@@ -16,6 +16,6 @@ class FragmentModule {
     @Provides
     @FragmentScoped
     fun provideBrowseViewModel (browseUseCase: BrowseUseCase) : BrowseViewModel {
-        return  BrowseViewModelFactory(browseUseCase = browseUseCase).create(BrowseViewModel::class.java)
+        return BrowseViewModelFactory(browseUseCase = browseUseCase).create(BrowseViewModel::class.java)
     }
 }
