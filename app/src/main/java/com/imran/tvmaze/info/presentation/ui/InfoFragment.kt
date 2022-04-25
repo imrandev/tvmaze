@@ -50,7 +50,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>() {
         fragmentInfoBinding.tvShowsName.text = item.name
         fragmentInfoBinding.tvShowsRuntime.text = String.format("%s Minutes", item.runtime)
 
-        val avgRating = (item.rating.average?.div(10))?.times(5)
+        val avgRating = (item.rating?.average?.div(10))?.times(5)
         if (avgRating != null) {
             fragmentInfoBinding.rbShowsRating.rating = avgRating.toFloat()
         }

@@ -6,29 +6,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/rv_item_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:visibility="gone"
             android:id="@+id/rv_no_internet_alert"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="wrap_content"
-            android:text="Something went wrong! Please try again"
+            android:text="@string/default_error_message"
             android:fontFamily="@font/titillium_web"
             android:textSize="@dimen/_16sdp"
             android:gravity="center"
-            android:drawableTop="@drawable/baseline_cloud_off_red_700_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableTopCompat="@drawable/baseline_cloud_off_red_700_24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

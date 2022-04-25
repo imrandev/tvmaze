@@ -22,6 +22,10 @@ import com.imran.tvmaze.core.adapter.RecyclerPagination
 import com.imran.tvmaze.core.network.Result
 import com.imran.tvmaze.databinding.FragmentBrowseBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -96,7 +100,10 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
             adapter = baseRecyclerAdapter
             setOnScrollListener(RecyclerPagination(onLoadMore = { page, scrollPosition ->
-                fetchTVShows(page, scrollPosition, viewBinding)
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(1000)
+                    fetchTVShows(page, scrollPosition, viewBinding)
+                }
             }))
         }
 
@@ -132,6 +139,9 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
                         baseRecyclerAdapter!!.update(result.data!!)
                     }
                 }
+                Result.Status.LOADING -> {
+                    if (page > 0) baseRecyclerAdapter!!.add(baseRecyclerAdapter!!.itemCount, Show())
+                }
                 else -> {
 
                 }
@@ -150,7 +160,11 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
             }
 
             override fun onLoadingView(parent: ViewGroup): BaseViewHolder<Show, IBaseClickListener<Show>> {
-                TODO("Not yet implemented")
+                return BrowseViewHolder(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context), R.layout.rv_item_loading, parent, false
+                    )
+                )
             }
 
             override fun onInfiniteLoadingView(parent: ViewGroup): BaseViewHolder<Show, IBaseClickListener<Show>> {

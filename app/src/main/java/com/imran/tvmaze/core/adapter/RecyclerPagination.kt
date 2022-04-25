@@ -12,20 +12,16 @@ class RecyclerPagination(
         super.onScrolled(recyclerView, dx, dy)
         val itemCount = recyclerView.adapter?.itemCount ?: 0
         if (itemCount < THRESHOLD) return
-
         val page = itemCount.div(THRESHOLD)
-
         val visibleItemPosition = recyclerView.layoutManager.run {
             when(this){
                 is LinearLayoutManager -> this.findLastCompletelyVisibleItemPosition()
                 else -> 0
             }
         }
-
         Log.d(TAG, "onScrolled: Visible Item Position $visibleItemPosition")
-
         if (visibleItemPosition == itemCount - 1 && !recyclerView.canScrollVertically(1) && dy > 0) {
-            onLoadMore(page + 1, itemCount)
+            onLoadMore(page, visibleItemPosition)
         }
     }
 

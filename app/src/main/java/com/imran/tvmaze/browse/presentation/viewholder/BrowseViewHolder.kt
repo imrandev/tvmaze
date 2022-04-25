@@ -68,7 +68,7 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
 
         itemShowsBinding.rvItemShowsName.text = item.name
 
-        val avgRating = (item.rating.average?.div(10))?.times(5)
+        val avgRating = (item.rating?.average?.div(10))?.times(5)
         if (avgRating != null) {
             itemShowsBinding.rvItemShowsRating.rating = avgRating.toFloat()
         }
