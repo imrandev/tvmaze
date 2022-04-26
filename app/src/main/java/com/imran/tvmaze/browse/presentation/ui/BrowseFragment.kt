@@ -44,21 +44,19 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_browse, menu)
 
         val menuItem = menu.findItem(R.id.action_menu_search)
         searchView = menuItem.actionView as SearchView
         searchView.queryHint = "Search TV"
-
         searchView.setOnCloseListener {
             (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
             false
         }
-
         searchView.setOnSearchClickListener {
             (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
@@ -78,7 +76,6 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
                 return false
             }
         })
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
