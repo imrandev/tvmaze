@@ -26,20 +26,4 @@ class BrowseRepositoryImpl @Inject constructor(private val browseDataSource: Bro
     override suspend fun findTVByPage(page: String): Result<BrowseResponse>{
         return browseDataSource.fetchShows(page)
     }
-
-    /*private suspend fun <BrowseResponse> getResponse(
-        request: suspend () -> Response<BrowseResponse>, defaultErrorMessage: String): Result<BrowseResponse> {
-        return try {
-            println("I'm working in thread ${Thread.currentThread().name}")
-            val result = request.invoke()
-            if (result.isSuccessful) {
-                return Result.success(result.body())
-            } else {
-                val errorResponse = ErrorUtils.parseError(result, retrofit)
-                Result.error(errorResponse?.message ?: defaultErrorMessage, errorResponse)
-            }
-        } catch (e: Throwable) {
-            Result.error("Unknown Error", null)
-        }
-    }*/
 }

@@ -3,11 +3,14 @@ package com.imran.tvmaze.browse.presentation.ui
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.imran.tvmaze.MainActivity
 import com.imran.tvmaze.R
 import com.imran.tvmaze.browse.presentation.utils.WrapContentLinearLayoutManager
@@ -24,7 +27,6 @@ import com.imran.tvmaze.databinding.FragmentBrowseBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,6 +40,20 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
     @Inject
     lateinit var browseViewModel : BrowseViewModel
 
+    private var page = 0
+
+    private lateinit var observer : Observer<Result<List<Show>>>
+
+    private var pullToRefresh : SwipeRefreshLayout? = null
+
+    private var isMenuExpanded = false
+
+    private var searchQuery = ""
+
+    private var isQuerySubmitted = false
+
+    override fun getLayoutRes(): Int = R.layout.fragment_browse
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -50,20 +66,31 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         val menuItem = menu.findItem(R.id.action_menu_search)
         searchView = menuItem.actionView as SearchView
         searchView.queryHint = "Search TV"
+
+        if (isMenuExpanded){
+            (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            searchView.isIconified = false
+            searchView.setQuery(searchQuery, false)
+        }
+
         searchView.setOnCloseListener {
             (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
             false
         }
         searchView.setOnSearchClickListener {
             (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            isMenuExpanded = true
         }
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
+                    searchQuery = query
                     browseViewModel.searchShows(query = query).observe(viewLifecycleOwner){
                         when (it.status){
                             Result.Status.SUCCESS -> {
                                 baseRecyclerAdapter!!.update(it.data!!)
+                                isQuerySubmitted = true
                             }
                             else -> {}
                         }
@@ -73,6 +100,9 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null){
+                    searchQuery = newText
+                }
                 return false
             }
         })
@@ -82,8 +112,9 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         when(item.itemId){
             android.R.id.home -> {
                 if (!searchView.isIconified){
-                    searchView.isIconified = true
-                    fetchTVShows(0, 0, null)
+                    if (isQuerySubmitted) fetchTVShows(page)
+                    // reset view to default
+                    resetUi(null)
                 }
             }
         }
@@ -91,58 +122,68 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
     }
 
     override fun onViewCreated(viewBinding: FragmentBrowseBinding?, savedInstanceState: Bundle?) {
+
+        pullToRefresh = viewBinding?.pullToRefresh
+
         initAdapter()
+
         viewBinding!!.rvShows.apply {
             layoutManager = WrapContentLinearLayoutManager(requireContext())
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
             adapter = baseRecyclerAdapter
-            setOnScrollListener(RecyclerPagination(onLoadMore = { page, scrollPosition ->
+            setOnScrollListener(RecyclerPagination(onLoadMore = { page, _ ->
                 CoroutineScope(Dispatchers.Main).launch {
-                    delay(1000)
-                    fetchTVShows(page, scrollPosition, viewBinding)
+                    fetchTVShows(page)
+                }
+            }, scrollToTop = { isTop ->
+                if (isTop) {
+                    viewBinding.scrollToTop.hide()
+                } else {
+                    viewBinding.scrollToTop.show()
                 }
             }))
         }
 
-        // fetch shows from TVMaze API
-        if (browseViewModel.tvShowList.value == null){
-            fetchTVShows(0, 0, viewBinding)
-        } else {
-            baseRecyclerAdapter!!.update(browseViewModel.tvShowList.value!!.data!!)
-        }
-
-        viewBinding.pullToRefresh.setOnRefreshListener {
-            if (viewBinding.pullToRefresh.isRefreshing){
-                // fetch shows from TVMaze API
-                fetchTVShows(0, 0, viewBinding)
-                viewBinding.pullToRefresh.isRefreshing = false
-            }
-        }
-    }
-
-    private fun fetchTVShows(page: Int, scrollPosition: Int, viewBinding: FragmentBrowseBinding?) {
-        browseViewModel.findShows(page = "$page").observe(viewLifecycleOwner){ result ->
+        observer = Observer { result ->
             when (result.status){
                 Result.Status.SUCCESS -> {
-                    if (page > 0){
-                        baseRecyclerAdapter!!.add(result.data!!, callback = { startPosition, itemCount, diffResult, adapter ->
-                            viewBinding?.rvShows?.post {
-                                baseRecyclerAdapter!!.notifyItemRangeInserted(startPosition, itemCount)
-                                diffResult.dispatchUpdatesTo(adapter)
-                            }
-                        })
-                        viewBinding!!.rvShows.scrollToPosition(scrollPosition)
-                    } else {
-                        baseRecyclerAdapter!!.update(result.data!!)
-                    }
+                    baseRecyclerAdapter!!.update(result.data!!)
+                    if (page >= 1) viewBinding.rvShows.smoothScrollBy(0, 100)
+                    viewBinding.pullToRefresh.isRefreshing = false
                 }
                 Result.Status.LOADING -> {
-                    if (page > 0) baseRecyclerAdapter!!.add(baseRecyclerAdapter!!.itemCount, Show())
+                    viewBinding.pullToRefresh.isRefreshing = true
                 }
-                else -> {
+                else -> {}
+            }
+        }
 
+        // fetch shows from TVMaze API
+        if (browseViewModel.tvShowList.value?.data == null){
+            fetchTVShows(page)
+        }
+        browseViewModel.tvShowList.observe(viewLifecycleOwner, observer)
+
+        pullToRefresh!!.setOnRefreshListener {
+            if (viewBinding.pullToRefresh.isRefreshing){
+                fetchTVShows(page)
+                // reset view to default
+                resetUi(viewBinding)
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                if (searchView.isIconfiedByDefault){
+                    if (isQuerySubmitted) fetchTVShows(page)
+                    // reset view to default
+                    resetUi(null)
                 }
             }
+        })
+
+        viewBinding.scrollToTop.setOnClickListener {
+            viewBinding.rvShows.smoothScrollToPosition(0)
         }
     }
 
@@ -179,7 +220,19 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         baseRecyclerAdapter!!.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
-    override fun getLayoutRes(): Int = R.layout.fragment_browse
+    private fun resetUi(viewBinding: FragmentBrowseBinding?) {
+        searchView.isIconified = true
+        isMenuExpanded = false
+        isQuerySubmitted = false
+        if (searchView.isIconfiedByDefault) searchView.isIconified = true
+        if (viewBinding != null)
+            viewBinding.pullToRefresh.isRefreshing = false
+    }
+
+    private fun fetchTVShows(page: Int) {
+        this.page = page
+        browseViewModel.findShows(page = page)
+    }
 
     private val tvItemClickListener = object : IBaseClickListener<Show> {
         override fun onItemClicked(view: View?, item: Show, position: Int) {
@@ -221,6 +274,17 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
 
     companion object {
         private const val TAG = "BrowseFragment"
+    }
+
+    override fun onResume() {
+        super.onResume()
+        pullToRefresh?.isEnabled = true
+    }
+
+    override fun onPause() {
+        browseViewModel.tvShowList.removeObserver(observer)
+        pullToRefresh?.isEnabled = false
+        super.onPause()
     }
 
     override fun onDestroyView() {

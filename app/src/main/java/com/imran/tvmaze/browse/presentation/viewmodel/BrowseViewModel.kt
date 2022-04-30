@@ -5,10 +5,12 @@ import com.imran.tvmaze.browse.domain.usecase.BrowseUseCase
 import com.imran.tvmaze.core.base.model.Show
 import com.imran.tvmaze.core.network.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
+import kotlin.streams.toList
 
 /**
  * Created by Imran Khan on 12/26/2020.
@@ -19,32 +21,32 @@ import javax.inject.Inject
 class BrowseViewModel @Inject constructor(private val browseUseCase: BrowseUseCase) : ViewModel() {
 
     val tvShowList = MutableLiveData<Result<List<Show>>>()
+    var data = listOf<Show>()
 
-    val isTVSearched = MutableLiveData<Boolean>()
+    fun findShows(page: Int): LiveData<Result<List<Show>>> {
 
-    fun findShows(page: String): LiveData<Result<List<Show>>> {
         viewModelScope.launch {
-            browseUseCase.getTVUseCase.execute(page).onStart {
-                tvShowList.postValue(Result.loading())
-            }.collectLatest{
-                tvShowList.postValue(it)
+            val result = browseUseCase.getTVUseCase.execute("$page")
+                .onStart {
+                    tvShowList.postValue(Result.loading())
+                    delay(1000)
+                }.toList().last()
+            data = if (page > 0){
+                data + result.data!!
+            } else {
+                result.data!!
             }
+            tvShowList.postValue(Result.success(data))
         }
         return tvShowList
     }
 
     fun searchShows(query: String): LiveData<Result<List<Show>>> {
         viewModelScope.launch {
-            browseUseCase.searchTVUseCase.execute(query).onStart {
+            tvShowList.value = browseUseCase.searchTVUseCase.execute(query).onStart {
                 tvShowList.postValue(Result.loading())
-            }.collectLatest{
-                tvShowList.postValue(it)
-            }
+            }.toList().last()
         }
         return tvShowList
-    }
-
-    fun setTvSearch(state: Boolean){
-        isTVSearched.postValue(state)
     }
 }

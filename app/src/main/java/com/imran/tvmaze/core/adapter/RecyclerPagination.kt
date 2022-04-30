@@ -5,7 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerPagination(
-    private val onLoadMore: (page: Int, scrollPosition: Int) -> Unit
+    private val onLoadMore: (page: Int, scrollPosition: Int) -> Unit,
+    private val scrollToTop: (visibility: Boolean) -> Unit
 ) : RecyclerView.OnScrollListener() {
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -21,8 +22,10 @@ class RecyclerPagination(
         }
         Log.d(TAG, "onScrolled: Visible Item Position $visibleItemPosition")
         if (visibleItemPosition == itemCount - 1 && !recyclerView.canScrollVertically(1) && dy > 0) {
-            onLoadMore(page, visibleItemPosition)
+            onLoadMore(page, itemCount)
         }
+        scrollToTop(!recyclerView.canScrollVertically(-1))
+        Log.d(TAG, String.format("onScrolled: dx = %s dy %s", dx, dy))
     }
 
     companion object {

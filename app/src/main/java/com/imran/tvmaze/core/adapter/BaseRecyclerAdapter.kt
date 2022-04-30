@@ -84,8 +84,12 @@ abstract class BaseRecyclerAdapter<T : Core, L : IBaseClickListener<T>?> protect
         adapter: RecyclerView.Adapter<BaseViewHolder<T, L>>)-> Unit
     ) {
         if (newItemList.isEmpty()) return
+        if (itemList.size > 0 && itemList[0].id == newItemList[0].id)
+            itemList.clear()
+
         val diffResult = DiffUtil.calculateDiff(DiffUtilItemCallback(itemList, newItemList))
-        itemList.addAll(newItemList)
+        itemList = (itemList + newItemList.toMutableList()) as MutableList<T>
+
         val start = if (itemList.isEmpty()) 0 else itemList.size
         callback(start, newItemList.size, diffResult, this)
     }
