@@ -35,6 +35,9 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
 
     override fun onLoadedBind(item: Show, onItemClickedListener: IBaseClickListener<Show>) {
         val itemShowsBinding = viewDataBinding as RvItemBrowseBinding
+
+        itemShowsBinding.rvItemFavoriteStatus.visibility = if (item.isFavorite) View.VISIBLE else View.GONE
+
         val mediumImage = if (item.image != null) item.image.medium else null
         Glide.with(itemView)
             .load(mediumImage)
@@ -63,7 +66,7 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
                     return false
                 }
             })
-            .error(R.drawable.baseline_local_movies_green_600_24dp)
+            .error(R.drawable.ic_local_movies_green_600_24dp)
             .into(itemShowsBinding.rvItemShowsPoster)
 
         itemShowsBinding.rvItemShowsName.text = item.name

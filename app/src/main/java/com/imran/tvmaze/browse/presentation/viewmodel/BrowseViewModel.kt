@@ -8,9 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
-import kotlin.streams.toList
 
 /**
  * Created by Imran Khan on 12/26/2020.
@@ -26,7 +24,7 @@ class BrowseViewModel @Inject constructor(private val browseUseCase: BrowseUseCa
     fun findShows(page: Int): LiveData<Result<List<Show>>> {
 
         viewModelScope.launch {
-            val result = browseUseCase.getTVUseCase.execute("$page")
+            val result = browseUseCase.getTVUseCase.invoke("$page")
                 .onStart {
                     tvShowList.postValue(Result.loading())
                     delay(1000)

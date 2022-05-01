@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/rv_item_menu_icon"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:contentDescription="@string/menu_bookmark_icon"
+            android:src="@drawable/ic_bookmarks_amber_700_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rv_item_menu_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/bookmarks"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingEnd="0dp"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@android:color/black"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/rv_item_menu_icon"
+            />
+
+        <TextView
+            android:id="@+id/rv_item_menu_sub_label"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/bookmark_sub_label"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingEnd="0dp"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@android:color/darker_gray"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@+id/rv_item_menu_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/rv_item_menu_icon"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

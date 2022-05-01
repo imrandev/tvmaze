@@ -44,13 +44,13 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
 
     private lateinit var observer : Observer<Result<List<Show>>>
 
-    private var pullToRefresh : SwipeRefreshLayout? = null
-
     private var isMenuExpanded = false
 
     private var searchQuery = ""
 
     private var isQuerySubmitted = false
+
+    private var isLoadMore = false
 
     override fun getLayoutRes(): Int = R.layout.fragment_browse
 
@@ -92,7 +92,9 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
                                 baseRecyclerAdapter!!.update(it.data!!)
                                 isQuerySubmitted = true
                             }
-                            else -> {}
+                            else -> {
+
+                            }
                         }
                     }
                 }
@@ -123,8 +125,6 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
 
     override fun onViewCreated(viewBinding: FragmentBrowseBinding?, savedInstanceState: Bundle?) {
 
-        pullToRefresh = viewBinding?.pullToRefresh
-
         initAdapter()
 
         viewBinding!!.rvShows.apply {
@@ -133,7 +133,10 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
             adapter = baseRecyclerAdapter
             setOnScrollListener(RecyclerPagination(onLoadMore = { page, _ ->
                 CoroutineScope(Dispatchers.Main).launch {
-                    fetchTVShows(page)
+                    if (!isLoadMore){
+                        isLoadMore = true
+                        fetchTVShows(page)
+                    }
                 }
             }, scrollToTop = { isTop ->
                 if (isTop) {
@@ -148,7 +151,10 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
             when (result.status){
                 Result.Status.SUCCESS -> {
                     baseRecyclerAdapter!!.update(result.data!!)
-                    if (page >= 1) viewBinding.rvShows.smoothScrollBy(0, 100)
+                    if (page >= 1) {
+                        viewBinding.rvShows.smoothScrollBy(0, 100)
+                        isLoadMore = false
+                    }
                     viewBinding.pullToRefresh.isRefreshing = false
                 }
                 Result.Status.LOADING -> {
@@ -164,7 +170,7 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         }
         browseViewModel.tvShowList.observe(viewLifecycleOwner, observer)
 
-        pullToRefresh!!.setOnRefreshListener {
+        viewBinding.pullToRefresh.setOnRefreshListener {
             if (viewBinding.pullToRefresh.isRefreshing){
                 fetchTVShows(page)
                 // reset view to default
@@ -267,7 +273,7 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
                 baseRecyclerAdapter!!.remove(item)
             }
             setNegativeButton("No", null)
-            setIcon(R.drawable.baseline_warning_red_900_24dp)
+            setIcon(R.drawable.ic_warning_red_900_24dp)
             show()
         }
     }
@@ -276,14 +282,8 @@ class BrowseFragment : BaseFragment<FragmentBrowseBinding>() {
         private const val TAG = "BrowseFragment"
     }
 
-    override fun onResume() {
-        super.onResume()
-        pullToRefresh?.isEnabled = true
-    }
-
     override fun onPause() {
         browseViewModel.tvShowList.removeObserver(observer)
-        pullToRefresh?.isEnabled = false
         super.onPause()
     }
 

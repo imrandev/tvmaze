@@ -17,13 +17,20 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_browseFragment_to_moreFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.imran.tvmaze.info.presentation.ui.InfoFragment"
         android:label="{title}"
-        tools:layout="@layout/fragment_info" />
+        tools:layout="@layout/fragment_info" >
+        <action
+            android:id="@+id/action_infoFragment_to_moreFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/dashboardFragment"
@@ -44,6 +51,24 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_moreFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.imran.tvmaze.menu.presentation.ui.MenuFragment"
+        android:label="More Explore"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_moreFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_moreFragment_to_browseFragment"
+            app:destination="@id/browseFragment" />
+        <action
+            android:id="@+id/action_moreFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
     </fragment>
 
 </navigation>

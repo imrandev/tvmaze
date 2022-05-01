@@ -8,7 +8,16 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('F:\\Android\\keystore\\default_app_keystore.jks')
+            storePassword 'wrd2d#63'
+            keyPassword 'wrd2d#63'
+            keyAlias 'imkdesk'
+        }
+    }
     compileSdkVersion 32
+
     defaultConfig {
         applicationId "com.imran.tvmaze"
         minSdkVersion 23
@@ -16,14 +25,20 @@ android {
         versionCode 1
         versionName "1.0"
 
+        resConfigs "en"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+
         buildConfigField 'String', 'BASE_URL', "\"http://api.tvmaze.com\""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         benchmark {
             signingConfig signingConfigs.debug
@@ -75,6 +90,8 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.4.2'
     kapt 'androidx.room:room-compiler:2.4.2'
     implementation 'androidx.room:room-ktx:2.4.2'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'

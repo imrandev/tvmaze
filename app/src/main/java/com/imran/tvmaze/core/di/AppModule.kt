@@ -12,9 +12,18 @@ import com.imran.tvmaze.browse.data.source.BrowseDataSource
 import com.imran.tvmaze.browse.data.source.SearchDataSource
 import com.imran.tvmaze.browse.domain.repository.BrowseRepository
 import com.imran.tvmaze.browse.domain.usecase.BrowseUseCase
-import com.imran.tvmaze.core.db.RoomService
+import com.imran.tvmaze.core.db.data.repository.BookmarkRepositoryImpl
+import com.imran.tvmaze.core.db.data.repository.GenreRepositoryImpl
+import com.imran.tvmaze.core.db.data.source.RoomDataSource
+import com.imran.tvmaze.core.db.domain.repository.BookmarkRepository
+import com.imran.tvmaze.core.db.domain.repository.GenreRepository
+import com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase
+import com.imran.tvmaze.core.db.domain.usecase.InsertBookmarkUseCase
+import com.imran.tvmaze.core.db.domain.usecase.InsertGenreUseCase
 import com.imran.tvmaze.core.network.ApiService
 import com.imran.tvmaze.core.utils.Constant
+import com.imran.tvmaze.info.domain.usecase.InfoUseCase
+import com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -98,14 +107,44 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideBrowseRepository(browseDataSource: BrowseDataSource, searchDataSource: SearchDataSource): BrowseRepository = BrowseRepositoryImpl(browseDataSource, searchDataSource)
+    fun provideBrowseRepository(browseDataSource: BrowseDataSource, searchDataSource: SearchDataSource):
+            BrowseRepository = BrowseRepositoryImpl(browseDataSource, searchDataSource)
 
     @Provides
     @Singleton
-    fun provideBrowseUseCase(browseRepository: BrowseRepository) : BrowseUseCase = BrowseUseCase(browseRepository)
+    fun provideBrowseUseCase(browseRepository: BrowseRepository, bookmarkRepository: BookmarkRepository) = BrowseUseCase(browseRepository, bookmarkRepository)
 
     @Provides
     @Singleton
-    fun provideRoomService(@ApplicationContext context: Context) :
-            RoomService = Room.databaseBuilder(context, RoomService::class.java, Constant.DB_NAME).build()
+    fun provideRoomDataSource(@ApplicationContext context: Context) :
+            RoomDataSource = Room.databaseBuilder(context, RoomDataSource::class.java, Constant.DB_NAME).build()
+
+    @Provides
+    @Singleton
+    fun provideGenreRepository(roomDataSource: RoomDataSource) : GenreRepository = GenreRepositoryImpl(roomDataSource)
+
+    @Provides
+    @Singleton
+    fun provideFavoriteRepository(roomDataSource: RoomDataSource) : BookmarkRepository = BookmarkRepositoryImpl(roomDataSource)
+
+    @Provides
+    @Singleton
+    fun provideInsertGenreUseCase(genreRepository: GenreRepository) = InsertGenreUseCase(genreRepository)
+
+    @Provides
+    @Singleton
+    fun provideInsertFavoriteUseCase(bookmarkRepository: BookmarkRepository, genreRepository: GenreRepository) = InsertBookmarkUseCase(bookmarkRepository, genreRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteFavoriteUseCase(bookmarkRepository: BookmarkRepository) = DeleteBookmarkUseCase(bookmarkRepository)
+
+    @Provides
+    @Singleton
+    fun provideInfoUseCase(insertGenreUseCase: InsertGenreUseCase, insertBookmarkUseCase: InsertBookmarkUseCase,
+                           deleteBookmarkUseCase: DeleteBookmarkUseCase) = InfoUseCase(insertGenreUseCase, insertBookmarkUseCase, deleteBookmarkUseCase)
+
+    @Provides
+    @Singleton
+    fun provideGenerateMenuViewModel() = GenerateMenuUseCase()
 }

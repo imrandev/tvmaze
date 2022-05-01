@@ -15,7 +15,8 @@
             android:layout_width="@dimen/_80sdp"
             android:layout_height="match_parent"
             android:padding="@dimen/_4sdp"
-            android:src="@drawable/baseline_local_movies_green_600_24dp"
+            android:background="@android:color/white"
+            android:src="@drawable/ic_local_movies_green_600_24dp"
             app:layout_constraintStart_toStartOf="parent"
             android:adjustViewBounds="true"/>
 
@@ -58,7 +59,7 @@
             android:textColor="@android:color/holo_green_dark"
             app:layout_constraintStart_toEndOf="@+id/rv_item_shows_poster"
             app:layout_constraintTop_toBottomOf="@+id/rv_item_shows_name"
-            app:drawableStartCompat="@drawable/baseline_language_indigo_600_18dp" />
+            app:drawableStartCompat="@drawable/ic_language_indigo_600_18dp" />
 
         <RatingBar
             android:id="@+id/rv_item_shows_rating"
@@ -87,25 +88,12 @@
             app:layout_constraintStart_toEndOf="@+id/rv_item_shows_poster"
             app:layout_constraintTop_toBottomOf="@+id/rv_item_shows_rating"/>
 
-        <!--<ImageView
-            android:id="@+id/rv_item_clear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_clear_red_700_24dp"
-            android:background="@drawable/circular_background"
-            android:layout_marginTop="@dimen/_14sdp"
-            android:layout_marginEnd="@dimen/_14sdp"
-            android:padding="@dimen/_4sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />-->
-
         <ImageView
             android:id="@+id/rv_item_forward_to_details"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:src="@drawable/baseline_arrow_forward_black_24dp"
-            android:layout_margin="@dimen/_14sdp"
-            android:padding="@dimen/_4sdp"
+            android:src="@drawable/ic_arrow_forward_black_24dp"
+            android:padding="@dimen/_14sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -124,6 +112,18 @@
             android:textColor="@android:color/holo_red_dark"
             app:layout_constraintStart_toEndOf="@+id/rv_item_shows_poster"
             app:layout_constraintTop_toBottomOf="@+id/rv_item_shows_genres"/>
+
+        <ImageView
+            android:id="@+id/rv_item_favorite_status"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="@dimen/_10sdp"
+            android:src="@drawable/bookmark_added_background"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_item_shows_poster"
+            app:layout_constraintEnd_toEndOf="@+id/rv_item_shows_poster"
+            android:contentDescription="@string/bookmark_added" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

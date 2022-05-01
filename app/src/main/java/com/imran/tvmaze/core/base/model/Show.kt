@@ -24,7 +24,8 @@ data class Show(
     val updated: Int?,
     val url: String?,
     val webChannel: WebChannel?,
-    val weight: Int?
+    val weight: Int?,
+    var isFavorite: Boolean =  false
 ) : Core(), Serializable {
     constructor(): this(
         null, null, listOf(), 0, null, "", "",

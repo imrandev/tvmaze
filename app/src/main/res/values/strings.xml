@@ -10,4 +10,10 @@
     <string name="english">English</string>
     <string name="ended">Ended</string>
     <string name="default_error_message">Something went wrong! Please try again</string>
+    <string name="favorite">Favorite</string>
+    <string name="added_favorite">Added as Favorite</string>
+    <string name="bookmark_added">bookmark added</string>
+    <string name="menu_bookmark_icon">menu bookmark icon</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="bookmark_sub_label">See all of your saved bookmarks, See all of your saved bookmarks, See all of your saved bookmarks, See all of your saved bookmarks</string>
 </resources>

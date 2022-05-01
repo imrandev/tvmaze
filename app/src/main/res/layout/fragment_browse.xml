@@ -29,7 +29,7 @@
                 app:useCompatPadding="true"
                 app:elevation="@dimen/_4sdp"
                 app:backgroundTint="@color/black"
-                app:srcCompat="@drawable/arrow_up_white_24dp"
+                app:srcCompat="@drawable/ic_arrow_up_white_24dp"
                 app:tint="@color/white"
                 android:visibility="gone"
                 />

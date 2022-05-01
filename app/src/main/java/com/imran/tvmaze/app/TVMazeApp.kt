@@ -1,10 +1,10 @@
 package com.imran.tvmaze.app
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class TVMazeApp : Application() {
+class TVMazeApp : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

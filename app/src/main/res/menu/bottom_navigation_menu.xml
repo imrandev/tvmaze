@@ -16,4 +16,11 @@
         app:showAsAction="ifRoom"
         />
 
+    <item
+        android:id="@id/menuFragment"
+        android:title="@string/browse"
+        android:icon="@drawable/ic_bottom_nav_more"
+        app:showAsAction="ifRoom"
+        />
+
 </menu>

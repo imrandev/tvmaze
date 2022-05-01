@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_160sdp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/baseline_local_movies_green_600_24dp"
+                android:src="@drawable/ic_local_movies_green_600_24dp"
                 android:adjustViewBounds="true"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -33,7 +33,7 @@
                 android:id="@+id/iv_shows_cover_poster"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_130sdp"
-                android:src="@drawable/baseline_local_movies_green_600_24dp"
+                android:src="@drawable/ic_local_movies_green_600_24dp"
                 android:adjustViewBounds="true"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_shows_cover_photo"
                 app:layout_constraintEnd_toEndOf="@+id/iv_shows_cover_photo"
