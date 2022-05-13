@@ -30,7 +30,7 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
     }
 
     override fun onLoadedBind(item: Show) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onLoadedBind(item: Show, onItemClickedListener: IBaseClickListener<Show>) {
@@ -84,10 +84,10 @@ class BrowseViewHolder (private val viewDataBinding: ViewDataBinding) : BaseView
     }
 
     override fun onLoadingBind() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onInfiniteLoadingBind() {
-        TODO("Not yet implemented")
+
     }
 }

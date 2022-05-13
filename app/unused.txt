@@ -10934,7 +10934,6 @@ androidx.navigation.NavController:
     public androidx.lifecycle.ViewModelStoreOwner getViewModelStoreOwner(int)
     public final kotlinx.coroutines.flow.StateFlow getVisibleEntries()
     public static synthetic void getVisibleEntries$annotations()
-    public void navigate(int)
     public void navigate(android.net.Uri)
     public void navigate(android.net.Uri,androidx.navigation.NavOptions)
     public void navigate(android.net.Uri,androidx.navigation.NavOptions,androidx.navigation.Navigator$Extras)
@@ -21092,6 +21091,7 @@ com.imran.tvmaze.DataBinderMapperImpl$InnerBrLookup
 com.imran.tvmaze.DataBinderMapperImpl$InnerLayoutIdLookup
 com.imran.tvmaze.DataBinderMapperImpl:
     private static final int LAYOUT_ACTIVITYMAIN
+    private static final int LAYOUT_FRAGMENTBOOKMARK
     private static final int LAYOUT_FRAGMENTBROWSE
     private static final int LAYOUT_FRAGMENTINFO
     private static final int LAYOUT_FRAGMENTMENU
@@ -21142,7 +21142,7 @@ com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedC
 com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedCImpl$ActivityCImpl$ViewCBuilder
 com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedCImpl$ActivityCImpl$ViewCImpl
 com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedCImpl$ActivityCImpl:
-    static synthetic java.util.Set access$1500(com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedCImpl$ActivityCImpl)
+    static synthetic java.util.Set access$1600(com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedCImpl$ActivityCImpl)
     private java.util.Set defaultActivityViewModelFactorySetOfViewModelProviderFactory()
     public dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories$InternalFactoryFactory getHiltInternalFactoryFactory()
     private androidx.lifecycle.ViewModelProvider$Factory provideFactory()
@@ -21177,6 +21177,22 @@ com.imran.tvmaze.app.TVMazeApp_HiltComponents$ViewWithFragmentC$Builder
 com.imran.tvmaze.app.TVMazeApp_HiltComponents$ViewWithFragmentC
 com.imran.tvmaze.app.TVMazeApp_HiltComponents$ViewWithFragmentCBuilderModule
 com.imran.tvmaze.app.TVMazeApp_HiltComponents
+com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase_Factory
+com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment:
+    public android.view.View _$_findCachedViewById(int)
+    public final void setBookmarkViewModel(com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel)
+com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment_MembersInjector:
+    private final javax.inject.Provider bookmarkViewModelProvider
+    public void <init>(javax.inject.Provider)
+    public static dagger.MembersInjector create(javax.inject.Provider)
+    public void injectMembers(com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment)
+    public synthetic bridge void injectMembers(java.lang.Object)
+com.imran.tvmaze.bookmark.presentation.ui.Hilt_BookmarkFragment:
+    public synthetic bridge dagger.hilt.internal.GeneratedComponentManager componentManager()
+    public androidx.lifecycle.ViewModelProvider$Factory getDefaultViewModelProviderFactory()
+com.imran.tvmaze.bookmark.presentation.viewholder.BookmarkViewHolder:
+    public void onViewRecycled()
+com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel_Factory
 com.imran.tvmaze.browse.data.repository.BrowseRepositoryImpl:
     private static final java.lang.String TAG
 com.imran.tvmaze.browse.data.repository.BrowseRepositoryImpl_Factory
@@ -21224,11 +21240,6 @@ com.imran.tvmaze.core.adapter.RecyclerPagination:
 com.imran.tvmaze.core.base.BaseFragment:
     public android.view.View _$_findCachedViewById(int)
 com.imran.tvmaze.core.base.BaseUseCase
-com.imran.tvmaze.core.db.dao.BookmarkDao:
-    public abstract java.lang.Object findAll(kotlin.coroutines.Continuation)
-com.imran.tvmaze.core.db.dao.BookmarkDao_Impl$5
-com.imran.tvmaze.core.db.dao.BookmarkDao_Impl:
-    public java.lang.Object findAll(kotlin.coroutines.Continuation)
 com.imran.tvmaze.core.db.dao.GenreDao:
     public abstract java.lang.Object delete(com.imran.tvmaze.core.db.domain.model.Genre,kotlin.coroutines.Continuation)
     public abstract java.lang.Object findAll(kotlin.coroutines.Continuation)
@@ -21241,10 +21252,6 @@ com.imran.tvmaze.core.db.dao.GenreDao_Impl:
     public java.lang.Object delete(com.imran.tvmaze.core.db.domain.model.Genre,kotlin.coroutines.Continuation)
     public java.lang.Object findAll(kotlin.coroutines.Continuation)
     public java.lang.Object findById(int,kotlin.coroutines.Continuation)
-com.imran.tvmaze.core.db.data.repository.BookmarkRepositoryImpl$findAll$2
-com.imran.tvmaze.core.db.data.repository.BookmarkRepositoryImpl:
-    public static final synthetic com.imran.tvmaze.core.db.data.source.RoomDataSource access$getRoomDataSource$p(com.imran.tvmaze.core.db.data.repository.BookmarkRepositoryImpl)
-    public java.lang.Object findAll(kotlin.coroutines.Continuation)
 com.imran.tvmaze.core.db.data.repository.GenreRepositoryImpl$delete$1
 com.imran.tvmaze.core.db.data.repository.GenreRepositoryImpl$findAll$2
 com.imran.tvmaze.core.db.data.repository.GenreRepositoryImpl$updatePointsById$1
@@ -21287,7 +21294,6 @@ com.imran.tvmaze.core.db.domain.model.Bookmark:
     public final java.lang.String component9()
     public final com.imran.tvmaze.core.db.domain.model.Bookmark copy(int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Double,java.lang.String,java.lang.Integer,java.lang.String,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String)
     public static synthetic com.imran.tvmaze.core.db.domain.model.Bookmark copy$default(com.imran.tvmaze.core.db.domain.model.Bookmark,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Double,java.lang.String,java.lang.Integer,java.lang.String,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,int,java.lang.Object)
-    public final void setId(int)
 com.imran.tvmaze.core.db.domain.model.Genre:
     public final int component1()
     public final java.lang.String component2()
@@ -21300,8 +21306,6 @@ com.imran.tvmaze.core.db.domain.repository.GenreRepository:
     public abstract java.lang.Object updatePointsById(int,float,kotlin.coroutines.Continuation)
     public abstract java.lang.Object updatePriorityById(int,int,kotlin.coroutines.Continuation)
     public abstract java.lang.Object updatePriorityByName(java.lang.String,int,kotlin.coroutines.Continuation)
-com.imran.tvmaze.core.db.domain.repository.RoomRepository:
-    public abstract java.lang.Object findAll(kotlin.coroutines.Continuation)
 com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase$invoke$2
 com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase$invoke$3
 com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase:
@@ -21372,10 +21376,17 @@ com.imran.tvmaze.core.di.AppModule_ProvideFavoriteRepositoryFactory:
     public static com.imran.tvmaze.core.di.AppModule_ProvideFavoriteRepositoryFactory create(com.imran.tvmaze.core.di.AppModule,javax.inject.Provider)
     public com.imran.tvmaze.core.db.domain.repository.BookmarkRepository get()
     public synthetic bridge java.lang.Object get()
-com.imran.tvmaze.core.di.AppModule_ProvideGenerateMenuViewModelFactory:
+com.imran.tvmaze.core.di.AppModule_ProvideFetchBookmarkUseCaseFactory:
+    private final javax.inject.Provider bookmarkRepositoryProvider
+    private final com.imran.tvmaze.core.di.AppModule module
+    public void <init>(com.imran.tvmaze.core.di.AppModule,javax.inject.Provider)
+    public static com.imran.tvmaze.core.di.AppModule_ProvideFetchBookmarkUseCaseFactory create(com.imran.tvmaze.core.di.AppModule,javax.inject.Provider)
+    public com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase get()
+    public synthetic bridge java.lang.Object get()
+com.imran.tvmaze.core.di.AppModule_ProvideGenerateMenuUseCaseFactory:
     private final com.imran.tvmaze.core.di.AppModule module
     public void <init>(com.imran.tvmaze.core.di.AppModule)
-    public static com.imran.tvmaze.core.di.AppModule_ProvideGenerateMenuViewModelFactory create(com.imran.tvmaze.core.di.AppModule)
+    public static com.imran.tvmaze.core.di.AppModule_ProvideGenerateMenuUseCaseFactory create(com.imran.tvmaze.core.di.AppModule)
     public com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase get()
     public synthetic bridge java.lang.Object get()
 com.imran.tvmaze.core.di.AppModule_ProvideGenreRepositoryFactory:
@@ -21447,6 +21458,13 @@ com.imran.tvmaze.core.di.AppModule_ProvideSearchDataSourceFactory:
     public static com.imran.tvmaze.core.di.AppModule_ProvideSearchDataSourceFactory create(com.imran.tvmaze.core.di.AppModule,javax.inject.Provider,javax.inject.Provider)
     public com.imran.tvmaze.browse.data.source.SearchDataSource get()
     public synthetic bridge java.lang.Object get()
+com.imran.tvmaze.core.di.FragmentModule_ProvideBookmarkViewModelFactory:
+    private final javax.inject.Provider fetchBookmarkUseCaseProvider
+    private final com.imran.tvmaze.core.di.FragmentModule module
+    public void <init>(com.imran.tvmaze.core.di.FragmentModule,javax.inject.Provider)
+    public static com.imran.tvmaze.core.di.FragmentModule_ProvideBookmarkViewModelFactory create(com.imran.tvmaze.core.di.FragmentModule,javax.inject.Provider)
+    public com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel get()
+    public synthetic bridge java.lang.Object get()
 com.imran.tvmaze.core.di.FragmentModule_ProvideBrowseViewModelFactory:
     private final javax.inject.Provider browseUseCaseProvider
     private final com.imran.tvmaze.core.di.FragmentModule module
@@ -21502,6 +21520,16 @@ com.imran.tvmaze.databinding.ActivityMainBinding:
     public static com.imran.tvmaze.databinding.ActivityMainBinding inflate(android.view.LayoutInflater,android.view.ViewGroup,boolean,java.lang.Object)
     public static com.imran.tvmaze.databinding.ActivityMainBinding inflate(android.view.LayoutInflater,java.lang.Object)
 com.imran.tvmaze.databinding.ActivityMainBindingImpl:
+    protected boolean onFieldChange(int,java.lang.Object,int)
+    public boolean setVariable(int,java.lang.Object)
+com.imran.tvmaze.databinding.FragmentBookmarkBinding:
+    public static com.imran.tvmaze.databinding.FragmentBookmarkBinding bind(android.view.View)
+    public static com.imran.tvmaze.databinding.FragmentBookmarkBinding bind(android.view.View,java.lang.Object)
+    public static com.imran.tvmaze.databinding.FragmentBookmarkBinding inflate(android.view.LayoutInflater)
+    public static com.imran.tvmaze.databinding.FragmentBookmarkBinding inflate(android.view.LayoutInflater,android.view.ViewGroup,boolean)
+    public static com.imran.tvmaze.databinding.FragmentBookmarkBinding inflate(android.view.LayoutInflater,android.view.ViewGroup,boolean,java.lang.Object)
+    public static com.imran.tvmaze.databinding.FragmentBookmarkBinding inflate(android.view.LayoutInflater,java.lang.Object)
+com.imran.tvmaze.databinding.FragmentBookmarkBindingImpl:
     protected boolean onFieldChange(int,java.lang.Object,int)
     public boolean setVariable(int,java.lang.Object)
 com.imran.tvmaze.databinding.FragmentBrowseBinding:
@@ -21843,6 +21871,7 @@ hilt_aggregated_deps.androidx_hilt_lifecycle_ViewModelFactoryModules_ActivityMod
 hilt_aggregated_deps.androidx_hilt_lifecycle_ViewModelFactoryModules_FragmentModuleModuleDeps
 hilt_aggregated_deps.com_imran_tvmaze_MainActivity_GeneratedInjectorModuleDeps
 hilt_aggregated_deps.com_imran_tvmaze_app_TVMazeApp_GeneratedInjectorModuleDeps
+hilt_aggregated_deps.com_imran_tvmaze_bookmark_presentation_ui_BookmarkFragment_GeneratedInjectorModuleDeps
 hilt_aggregated_deps.com_imran_tvmaze_browse_presentation_ui_BrowseFragment_GeneratedInjectorModuleDeps
 hilt_aggregated_deps.com_imran_tvmaze_core_di_ActivityModuleModuleDeps
 hilt_aggregated_deps.com_imran_tvmaze_core_di_AppModuleModuleDeps
@@ -29917,15 +29946,16 @@ androidx.appcompat.R$bool:
     public int convertToConstraintSet(int,int,float,float)
     public static float distanceToFurthestCorner(float,float,float,float,float,float)
     public static java.io.File getNoBackupFilesDir(android.content.Context)
-    public static void injectBrowseViewModel(com.imran.tvmaze.browse.presentation.ui.BrowseFragment,com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel)
+    public static void injectBookmarkViewModel(com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment,com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel)
     public static boolean isMeizuDevice()
     public static float max(float,float,float,float)
     public void pause()
-    public static java.lang.String provideBaseUrl(com.bumptech.glide.load.resource.gif.GifDrawableEncoder)
-    public static com.imran.tvmaze.browse.domain.usecase.BrowseUseCase provideBrowseUseCase(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.browse.domain.repository.BrowseRepository,com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
-    public static com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel provideBrowseViewModel(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.browse.domain.usecase.BrowseUseCase)
-    public static com.imran.tvmaze.core.db.domain.repository.BookmarkRepository provideFavoriteRepository(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.core.db.data.source.RoomDataSource)
-    public static com.imran.tvmaze.core.db.domain.usecase.InsertGenreUseCase provideInsertGenreUseCase(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.core.db.domain.repository.GenreRepository)
+    public static com.imran.tvmaze.browse.domain.repository.BrowseRepository provideBrowseRepository(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.browse.data.source.BrowseDataSource,com.imran.tvmaze.browse.data.source.SearchDataSource)
+    public static com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase provideDeleteFavoriteUseCase(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
+    public static com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase provideGenerateMenuUseCase(androidx.constraintlayout.widget.R$id)
+    public static com.imran.tvmaze.info.domain.usecase.InfoUseCase provideInfoUseCase(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.core.db.domain.usecase.InsertGenreUseCase,com.imran.tvmaze.core.db.domain.usecase.InsertBookmarkUseCase,com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase)
+    public static okhttp3.OkHttpClient provideOkHttpClient(androidx.constraintlayout.widget.R$id,okhttp3.Cache,android.content.Context)
+    public static com.imran.tvmaze.browse.data.source.SearchDataSource provideSearchDataSource(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.core.network.ApiService,retrofit2.Retrofit)
     public void resume()
 androidx.appcompat.R$color:
     public static final int Animation_AppCompat_Tooltip$androidx$appcompat$R$style
@@ -30070,11 +30100,11 @@ androidx.appcompat.R$color:
     public static java.lang.String getDatePartOfDateTimePattern(int)
     public static java.lang.String getTimePartOfDateTimePattern(int)
     public static int growSize(int)
+    public static void injectBrowseViewModel(com.imran.tvmaze.browse.presentation.ui.BrowseFragment,com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel)
     public static boolean isMediaStoreImageUri(android.net.Uri)
     public static boolean isMediaStoreVideoUri(android.net.Uri)
     public static boolean isVideoUri(android.net.Uri)
-    public static com.imran.tvmaze.browse.data.source.BrowseDataSource provideBrowseDataSource(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.core.network.ApiService,retrofit2.Retrofit)
-    public static okhttp3.Cache provideCache(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,android.content.Context)
+    public static java.lang.String provideBaseUrl(androidx.constraintlayout.widget.R$id)
     public static void set(android.view.View,androidx.lifecycle.LifecycleOwner)
     public static void set(android.view.View,androidx.savedstate.SavedStateRegistryOwner)
     public static void setExtras(android.database.Cursor,android.os.Bundle)
@@ -30284,10 +30314,10 @@ androidx.appcompat.R$dimen:
     public static int layer(android.view.View,int,int,float)
     public static final androidx.lifecycle.LiveData liveData(kotlin.coroutines.CoroutineContext,long,kotlin.jvm.functions.Function2)
     public static androidx.lifecycle.LiveData liveData$default(kotlin.coroutines.CoroutineContext,long,kotlin.jvm.functions.Function2,int)
-    public static com.imran.tvmaze.browse.domain.repository.BrowseRepository provideBrowseRepository(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.browse.data.source.BrowseDataSource,com.imran.tvmaze.browse.data.source.SearchDataSource)
-    public static com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase provideDeleteFavoriteUseCase(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
-    public static com.imran.tvmaze.core.db.domain.repository.GenreRepository provideGenreRepository(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.core.db.data.source.RoomDataSource)
-    public static com.imran.tvmaze.core.db.domain.usecase.InsertBookmarkUseCase provideInsertFavoriteUseCase(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.core.db.domain.repository.BookmarkRepository,com.imran.tvmaze.core.db.domain.repository.GenreRepository)
+    public static com.imran.tvmaze.browse.data.source.BrowseDataSource provideBrowseDataSource(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.core.network.ApiService,retrofit2.Retrofit)
+    public static okhttp3.Cache provideCache(androidx.constraintlayout.widget.R$id,android.content.Context)
+    public static com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase provideFetchBookmarkUseCase(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
+    public static com.imran.tvmaze.core.db.domain.usecase.InsertGenreUseCase provideInsertGenreUseCase(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.core.db.domain.repository.GenreRepository)
     public static void set(android.view.View,androidx.lifecycle.ViewModelStoreOwner)
     public void setFloatValue(java.lang.Object,java.lang.String,int,float)
     public static void setNotificationUris(android.database.Cursor,android.content.ContentResolver,java.util.List)
@@ -32646,12 +32676,28 @@ androidx.constraintlayout.widget.R$id:
     private void $r8$constructor$androidx$constraintlayout$widget$R$id()
     private void $r8$constructor$com$bumptech$glide$load$engine$EngineKeyFactory()
     private void $r8$constructor$com$bumptech$glide$manager$EmptyRequestManagerTreeNode()
-    private void $r8$constructor$com$imran$tvmaze$core$di$FragmentModule()
+    private void $r8$constructor$com$imran$tvmaze$core$di$AppModule()
     public com.bumptech.glide.load.engine.EngineKey buildKey(java.lang.Object,com.bumptech.glide.load.Key,int,int,java.util.Map,java.lang.Class,java.lang.Class,com.bumptech.glide.load.Options)
     public java.util.Set getDescendants()
-    public com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel provideBrowseViewModel(com.imran.tvmaze.browse.domain.usecase.BrowseUseCase)
-    public com.imran.tvmaze.info.presentation.viewmodel.InfoViewModel provideInfoViewModel(com.imran.tvmaze.info.domain.usecase.InfoUseCase)
-    public com.imran.tvmaze.menu.presentation.viewmodel.MenuViewModel provideMenuViewModel(com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase)
+    public com.imran.tvmaze.core.network.ApiService provideApiRepository(retrofit2.Retrofit)
+    public java.lang.String provideBaseUrl()
+    public com.imran.tvmaze.browse.data.source.BrowseDataSource provideBrowseDataSource(com.imran.tvmaze.core.network.ApiService,retrofit2.Retrofit)
+    public com.imran.tvmaze.browse.domain.repository.BrowseRepository provideBrowseRepository(com.imran.tvmaze.browse.data.source.BrowseDataSource,com.imran.tvmaze.browse.data.source.SearchDataSource)
+    public com.imran.tvmaze.browse.domain.usecase.BrowseUseCase provideBrowseUseCase(com.imran.tvmaze.browse.domain.repository.BrowseRepository,com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
+    public okhttp3.Cache provideCache(android.content.Context)
+    public com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase provideDeleteFavoriteUseCase(com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
+    public com.imran.tvmaze.core.db.domain.repository.BookmarkRepository provideFavoriteRepository(com.imran.tvmaze.core.db.data.source.RoomDataSource)
+    public com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase provideFetchBookmarkUseCase(com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
+    public com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase provideGenerateMenuUseCase()
+    public com.imran.tvmaze.core.db.domain.repository.GenreRepository provideGenreRepository(com.imran.tvmaze.core.db.data.source.RoomDataSource)
+    public com.google.gson.Gson provideGson()
+    public com.imran.tvmaze.info.domain.usecase.InfoUseCase provideInfoUseCase(com.imran.tvmaze.core.db.domain.usecase.InsertGenreUseCase,com.imran.tvmaze.core.db.domain.usecase.InsertBookmarkUseCase,com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase)
+    public com.imran.tvmaze.core.db.domain.usecase.InsertBookmarkUseCase provideInsertFavoriteUseCase(com.imran.tvmaze.core.db.domain.repository.BookmarkRepository,com.imran.tvmaze.core.db.domain.repository.GenreRepository)
+    public com.imran.tvmaze.core.db.domain.usecase.InsertGenreUseCase provideInsertGenreUseCase(com.imran.tvmaze.core.db.domain.repository.GenreRepository)
+    public okhttp3.OkHttpClient provideOkHttpClient(okhttp3.Cache,android.content.Context)
+    public retrofit2.Retrofit provideRetrofit(okhttp3.OkHttpClient,com.google.gson.Gson,java.lang.String)
+    public com.imran.tvmaze.core.db.data.source.RoomDataSource provideRoomDataSource(android.content.Context)
+    public com.imran.tvmaze.browse.data.source.SearchDataSource provideSearchDataSource(com.imran.tvmaze.core.network.ApiService,retrofit2.Retrofit)
 androidx.constraintlayout.widget.R$styleable:
     public static final int[] ActionBar
     public static final int[] ActionBarLayout
@@ -35293,6 +35339,7 @@ androidx.navigation.NavController:
     public boolean handleDeepLink(android.content.Intent)
     public final java.util.List instantiateBackStack(kotlin.collections.ArrayDeque)
     public static final void lifecycleObserver$lambda-2(androidx.navigation.NavController,androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle$Event)
+    public void navigate(int)
     public void navigate(int,android.os.Bundle)
     public void navigate(int,android.os.Bundle,androidx.navigation.NavOptions,androidx.navigation.Navigator$Extras)
     public final void navigateInternal(androidx.navigation.Navigator,java.util.List,androidx.navigation.NavOptions,androidx.navigation.Navigator$Extras,kotlin.jvm.functions.Function1)
@@ -35522,9 +35569,7 @@ androidx.navigation.Navigation$findViewNavController$2:
     public final androidx.navigation.NavController invoke(android.view.View)
 androidx.navigation.Navigation:
     public static final androidx.navigation.NavController access$getViewNavController(androidx.navigation.Navigation,android.view.View)
-    public static final androidx.navigation.NavController findNavController(android.app.Activity,int)
     public static final androidx.navigation.NavController findNavController(android.view.View)
-    public final androidx.navigation.NavController findViewNavController(android.view.View)
     public final androidx.navigation.NavController getViewNavController(android.view.View)
 androidx.navigation.Navigator$navigate$1:
     public final androidx.navigation.NavBackStackEntry invoke(androidx.navigation.NavBackStackEntry)
@@ -36386,9 +36431,12 @@ androidx.room.AutoClosingRoomOpenHelper$AutoClosingSupportSqliteStatement$$Inter
 androidx.room.AutoClosingRoomOpenHelper$AutoClosingSupportSqliteStatement$$InternalSyntheticLambda$0$efce483dbdb0a6cc7896b076f4cc047237a6c2e413d8115e59f32765fa24f71a$0
 androidx.room.AutoClosingRoomOpenHelper$AutoClosingSupportSqliteStatement$$InternalSyntheticLambda$1$f1c8b9f5cf234073c06c75539345b55320cda6c207135dd9a4d39533ec353068$0:
     private synthetic void $r8$constructor$androidx$room$AutoClosingRoomOpenHelper$AutoClosingSupportSqliteStatement$$InternalSyntheticLambda$1$f1c8b9f5cf234073c06c75539345b55320cda6c207135dd9a4d39533ec353068$0(androidx.room.AutoClosingRoomOpenHelper$AutoClosingSupportSqliteStatement,androidx.arch.core.util.Function)
+    private synthetic void $r8$constructor$com$imran$tvmaze$bookmark$presentation$ui$BookmarkFragment$$InternalSyntheticLambda$0$e197395767e495f26065c257e9343ac0da24987d5d7e6d761a3192fc8d82111f$0(com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment,com.imran.tvmaze.databinding.FragmentBookmarkBinding)
     private synthetic void $r8$constructor$com$imran$tvmaze$info$presentation$ui$InfoFragment$$InternalSyntheticLambda$1$04bc0aa63d1cdea406ba38831b2f820cabff3ebc1c18a23ffc64f09d675d23f2$0(com.imran.tvmaze.info.presentation.ui.InfoFragment,android.widget.CheckBox)
     public synthetic void <init>(androidx.room.AutoClosingRoomOpenHelper$AutoClosingSupportSqliteStatement,androidx.arch.core.util.Function)
     public java.lang.Object apply(java.lang.Object)
+    private final void onChanged$com$imran$tvmaze$bookmark$presentation$ui$BookmarkFragment$$InternalSyntheticLambda$0$e197395767e495f26065c257e9343ac0da24987d5d7e6d761a3192fc8d82111f$0(java.lang.Object)
+    private final void onChanged$com$imran$tvmaze$info$presentation$ui$InfoFragment$$InternalSyntheticLambda$1$04bc0aa63d1cdea406ba38831b2f820cabff3ebc1c18a23ffc64f09d675d23f2$0(java.lang.Object)
 androidx.room.AutoClosingRoomOpenHelper$AutoClosingSupportSqliteStatement
 androidx.room.AutoClosingRoomOpenHelper$KeepAliveCursor
 androidx.room.AutoClosingRoomOpenHelper:
@@ -37913,26 +37961,12 @@ com.bumptech.glide.load.resource.gif.GifDrawable:
 com.bumptech.glide.load.resource.gif.GifDrawableEncoder:
     private void $r8$constructor$com$bumptech$glide$load$resource$gif$GifDrawableEncoder()
     private void $r8$constructor$com$bumptech$glide$manager$ApplicationLifecycle()
-    private void $r8$constructor$com$imran$tvmaze$core$di$AppModule()
+    private void $r8$constructor$com$imran$tvmaze$core$di$FragmentModule()
     public boolean encode(com.bumptech.glide.load.engine.Resource,java.io.File)
-    public com.imran.tvmaze.core.network.ApiService provideApiRepository(retrofit2.Retrofit)
-    public java.lang.String provideBaseUrl()
-    public com.imran.tvmaze.browse.data.source.BrowseDataSource provideBrowseDataSource(com.imran.tvmaze.core.network.ApiService,retrofit2.Retrofit)
-    public com.imran.tvmaze.browse.domain.repository.BrowseRepository provideBrowseRepository(com.imran.tvmaze.browse.data.source.BrowseDataSource,com.imran.tvmaze.browse.data.source.SearchDataSource)
-    public com.imran.tvmaze.browse.domain.usecase.BrowseUseCase provideBrowseUseCase(com.imran.tvmaze.browse.domain.repository.BrowseRepository,com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
-    public okhttp3.Cache provideCache(android.content.Context)
-    public com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase provideDeleteFavoriteUseCase(com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
-    public com.imran.tvmaze.core.db.domain.repository.BookmarkRepository provideFavoriteRepository(com.imran.tvmaze.core.db.data.source.RoomDataSource)
-    public com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase provideGenerateMenuViewModel()
-    public com.imran.tvmaze.core.db.domain.repository.GenreRepository provideGenreRepository(com.imran.tvmaze.core.db.data.source.RoomDataSource)
-    public com.google.gson.Gson provideGson()
-    public com.imran.tvmaze.info.domain.usecase.InfoUseCase provideInfoUseCase(com.imran.tvmaze.core.db.domain.usecase.InsertGenreUseCase,com.imran.tvmaze.core.db.domain.usecase.InsertBookmarkUseCase,com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase)
-    public com.imran.tvmaze.core.db.domain.usecase.InsertBookmarkUseCase provideInsertFavoriteUseCase(com.imran.tvmaze.core.db.domain.repository.BookmarkRepository,com.imran.tvmaze.core.db.domain.repository.GenreRepository)
-    public com.imran.tvmaze.core.db.domain.usecase.InsertGenreUseCase provideInsertGenreUseCase(com.imran.tvmaze.core.db.domain.repository.GenreRepository)
-    public okhttp3.OkHttpClient provideOkHttpClient(okhttp3.Cache,android.content.Context)
-    public retrofit2.Retrofit provideRetrofit(okhttp3.OkHttpClient,com.google.gson.Gson,java.lang.String)
-    public com.imran.tvmaze.core.db.data.source.RoomDataSource provideRoomDataSource(android.content.Context)
-    public com.imran.tvmaze.browse.data.source.SearchDataSource provideSearchDataSource(com.imran.tvmaze.core.network.ApiService,retrofit2.Retrofit)
+    public com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel provideBookmarkViewModel(com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase)
+    public com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel provideBrowseViewModel(com.imran.tvmaze.browse.domain.usecase.BrowseUseCase)
+    public com.imran.tvmaze.info.presentation.viewmodel.InfoViewModel provideInfoViewModel(com.imran.tvmaze.info.domain.usecase.InfoUseCase)
+    public com.imran.tvmaze.menu.presentation.viewmodel.MenuViewModel provideMenuViewModel(com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase)
 com.bumptech.glide.load.resource.gif.GifFrameLoader$DelayTarget:
     public android.graphics.Bitmap getResource()
     public void onResourceReady(android.graphics.Bitmap)
@@ -40625,9 +40659,11 @@ com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedC
     public dagger.hilt.android.internal.builders.FragmentComponentBuilder fragment(androidx.fragment.app.Fragment)
 com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedCImpl$ActivityCImpl$FragmentCImpl:
     public final androidx.fragment.app.Fragment fragment
-    public void <init>(com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedCImpl$ActivityCImpl,androidx.constraintlayout.widget.R$id,androidx.fragment.app.Fragment)
+    public void <init>(com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedCImpl$ActivityCImpl,com.bumptech.glide.load.resource.gif.GifDrawableEncoder,androidx.fragment.app.Fragment)
+    public final com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel bookmarkViewModel()
     public final com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel browseViewModel()
     public final com.imran.tvmaze.info.presentation.viewmodel.InfoViewModel infoViewModel()
+    public final com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment injectBookmarkFragment2(com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment)
     public final com.imran.tvmaze.browse.presentation.ui.BrowseFragment injectBrowseFragment2(com.imran.tvmaze.browse.presentation.ui.BrowseFragment)
     public final com.imran.tvmaze.info.presentation.ui.InfoFragment injectInfoFragment2(com.imran.tvmaze.info.presentation.ui.InfoFragment)
     public final com.imran.tvmaze.menu.presentation.ui.MenuFragment injectMenuFragment2(com.imran.tvmaze.menu.presentation.ui.MenuFragment)
@@ -40640,9 +40676,10 @@ com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$ActivityRetainedC
     public final java.lang.Object lifecycle()
 com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$Builder
 com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC:
-    public void <init>(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,dagger.hilt.android.internal.modules.ApplicationContextModule)
+    public void <init>(androidx.constraintlayout.widget.R$id,dagger.hilt.android.internal.modules.ApplicationContextModule)
     public final com.imran.tvmaze.browse.domain.usecase.BrowseUseCase browseUseCase()
     public static com.imran.tvmaze.app.DaggerTVMazeApp_HiltComponents_SingletonC$Builder builder()
+    public final com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase fetchBookmarkUseCase()
     public final com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase generateMenuUseCase()
     public final com.google.gson.Gson gson()
     public final com.imran.tvmaze.info.domain.usecase.InfoUseCase infoUseCase()
@@ -40650,6 +40687,38 @@ com.imran.tvmaze.app.Hilt_TVMazeApp$1:
     public java.lang.Object get()
 com.imran.tvmaze.app.Hilt_TVMazeApp:
     public final dagger.hilt.android.internal.managers.ApplicationComponentManager componentManager()
+com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase:
+    public final java.lang.Object invoke(kotlin.coroutines.Continuation)
+com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment$$InternalSyntheticLambda$0$e197395767e495f26065c257e9343ac0da24987d5d7e6d761a3192fc8d82111f$0
+com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment$WhenMappings
+com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment$itemClickListener$1:
+    public void onItemClicked(android.view.View,com.imran.tvmaze.core.db.domain.model.Bookmark)
+com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment:
+    public static void $r8$lambda$nRvNix9vLE2SLWmB0U9ld-hfpCo(com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment,com.imran.tvmaze.databinding.FragmentBookmarkBinding,com.imran.tvmaze.core.network.Result)
+    public final com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel getBookmarkViewModel()
+    public final void initBookmarkAdapter()
+    public void onViewCreated(com.imran.tvmaze.databinding.FragmentBookmarkBinding)
+    public static final void onViewCreated$lambda-1(com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment,com.imran.tvmaze.databinding.FragmentBookmarkBinding,com.imran.tvmaze.core.network.Result)
+com.imran.tvmaze.bookmark.presentation.ui.BookmarkFragment_MembersInjector
+com.imran.tvmaze.bookmark.presentation.ui.Hilt_BookmarkFragment:
+    public final dagger.hilt.android.internal.managers.FragmentComponentManager componentManager()
+    public dagger.hilt.android.internal.managers.FragmentComponentManager createComponentManager()
+    public void inject()
+com.imran.tvmaze.bookmark.presentation.viewholder.BookmarkViewHolder$onLoadedBind$1:
+    public boolean onResourceReady()
+com.imran.tvmaze.bookmark.presentation.viewholder.BookmarkViewHolder:
+    public void onLoadedBind(com.imran.tvmaze.core.db.domain.model.Bookmark)
+    public void onLoadedBind(com.imran.tvmaze.core.db.domain.model.Bookmark,com.imran.tvmaze.core.adapter.IBaseClickListener)
+com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel$getBookmarks$1$data$1:
+    public int label
+    public final java.lang.Object invoke(kotlinx.coroutines.flow.FlowCollector,kotlin.coroutines.Continuation)
+com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel$getBookmarks$1:
+    public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
+com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel:
+    public static final synthetic com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase access$getFetchBookmarkUseCase$p(com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel)
+    public final androidx.lifecycle.LiveData getBookmarks()
+    public final androidx.lifecycle.MutableLiveData getBookmarks()
+com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModelFactory
 com.imran.tvmaze.browse.data.repository.BrowseRepositoryImpl$Companion
 com.imran.tvmaze.browse.data.repository.BrowseRepositoryImpl:
     public static final com.imran.tvmaze.browse.data.repository.BrowseRepositoryImpl$Companion Companion
@@ -40797,6 +40866,8 @@ com.imran.tvmaze.core.db.dao.BookmarkDao_Impl$3:
     public kotlin.Unit call()
 com.imran.tvmaze.core.db.dao.BookmarkDao_Impl$4:
     public kotlin.Unit call()
+com.imran.tvmaze.core.db.dao.BookmarkDao_Impl$5:
+    public java.util.List call()
 com.imran.tvmaze.core.db.dao.BookmarkDao_Impl$6:
     public com.imran.tvmaze.core.db.domain.model.Bookmark call()
 com.imran.tvmaze.core.db.dao.BookmarkDao_Impl:
@@ -40817,6 +40888,10 @@ com.imran.tvmaze.core.db.dao.GenreDao_Impl:
     public static synthetic androidx.room.RoomDatabase access$000(com.imran.tvmaze.core.db.dao.GenreDao_Impl)
     public static synthetic androidx.room.EntityInsertionAdapter access$100(com.imran.tvmaze.core.db.dao.GenreDao_Impl)
     public static java.util.List getRequiredConverters()
+com.imran.tvmaze.core.db.data.repository.BookmarkRepositoryImpl$findAll$2:
+    public final java.lang.Object invoke(kotlinx.coroutines.flow.FlowCollector,kotlin.coroutines.Continuation)
+com.imran.tvmaze.core.db.data.repository.BookmarkRepositoryImpl:
+    public static final synthetic com.imran.tvmaze.core.db.data.source.RoomDataSource access$getRoomDataSource$p(com.imran.tvmaze.core.db.data.repository.BookmarkRepositoryImpl)
 com.imran.tvmaze.core.db.data.source.RoomDataSource_Impl$1:
     public void createAllTables(androidx.sqlite.db.SupportSQLiteDatabase)
     public void dropAllTables(androidx.sqlite.db.SupportSQLiteDatabase)
@@ -40840,7 +40915,6 @@ com.imran.tvmaze.core.db.domain.model.Bookmark:
     public final java.lang.String getDays()
     public final java.lang.String getEnded()
     public final java.lang.String getGenres()
-    public final int getId()
     public final java.lang.String getImdb()
     public final java.lang.String getLanguage()
     public final java.lang.String getMedium()
@@ -40887,11 +40961,7 @@ com.imran.tvmaze.core.di.AppModule_ProvideApiRepositoryFactory
 com.imran.tvmaze.core.di.AppModule_ProvideBaseUrlFactory
 com.imran.tvmaze.core.di.AppModule_ProvideBrowseDataSourceFactory
 com.imran.tvmaze.core.di.AppModule_ProvideBrowseRepositoryFactory
-com.imran.tvmaze.core.di.AppModule_ProvideBrowseUseCaseFactory
-com.imran.tvmaze.core.di.AppModule_ProvideCacheFactory
-com.imran.tvmaze.core.di.AppModule_ProvideDeleteFavoriteUseCaseFactory
-com.imran.tvmaze.core.di.AppModule_ProvideFavoriteRepositoryFactory
-com.imran.tvmaze.core.di.AppModule_ProvideGenerateMenuViewModelFactory:
+com.imran.tvmaze.core.di.AppModule_ProvideBrowseUseCaseFactory:
     public static final java.util.concurrent.CancellationException CancellationException(java.lang.String,java.lang.Throwable)
     public static final kotlinx.coroutines.CompletableJob SupervisorJob(kotlinx.coroutines.Job)
     public static kotlinx.coroutines.CompletableJob SupervisorJob$default(kotlinx.coroutines.Job,int)
@@ -40916,17 +40986,22 @@ com.imran.tvmaze.core.di.AppModule_ProvideGenerateMenuViewModelFactory:
     public static final kotlin.coroutines.Continuation probeCoroutineCreated(kotlin.coroutines.Continuation)
     public static final void probeCoroutineResumed(kotlin.coroutines.Continuation)
     public static final void probeCoroutineSuspended(kotlin.coroutines.Continuation)
-    public static com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase provideGenerateMenuViewModel(com.bumptech.glide.load.resource.gif.GifDrawableEncoder)
-    public static com.imran.tvmaze.info.domain.usecase.InfoUseCase provideInfoUseCase(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.core.db.domain.usecase.InsertGenreUseCase,com.imran.tvmaze.core.db.domain.usecase.InsertBookmarkUseCase,com.imran.tvmaze.core.db.domain.usecase.DeleteBookmarkUseCase)
-    public static com.imran.tvmaze.info.presentation.viewmodel.InfoViewModel provideInfoViewModel(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.info.domain.usecase.InfoUseCase)
-    public static okhttp3.OkHttpClient provideOkHttpClient(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,okhttp3.Cache,android.content.Context)
-    public static com.imran.tvmaze.browse.data.source.SearchDataSource provideSearchDataSource(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.core.network.ApiService,retrofit2.Retrofit)
+    public static com.imran.tvmaze.browse.domain.usecase.BrowseUseCase provideBrowseUseCase(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.browse.domain.repository.BrowseRepository,com.imran.tvmaze.core.db.domain.repository.BookmarkRepository)
+    public static com.imran.tvmaze.core.db.domain.repository.BookmarkRepository provideFavoriteRepository(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.core.db.data.source.RoomDataSource)
+    public static com.imran.tvmaze.core.db.domain.repository.GenreRepository provideGenreRepository(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.core.db.data.source.RoomDataSource)
+    public static com.imran.tvmaze.info.presentation.viewmodel.InfoViewModel provideInfoViewModel(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.info.domain.usecase.InfoUseCase)
+    public static com.imran.tvmaze.core.db.domain.usecase.InsertBookmarkUseCase provideInsertFavoriteUseCase(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.core.db.domain.repository.BookmarkRepository,com.imran.tvmaze.core.db.domain.repository.GenreRepository)
     public static final void removeOnCancellation(kotlinx.coroutines.CancellableContinuation,kotlinx.coroutines.internal.LockFreeLinkedListNode)
     public static final void resumeUnconfined(kotlinx.coroutines.DispatchedTask)
     public static final void startCoroutineUndispatched(kotlin.jvm.functions.Function2,java.lang.Object,kotlin.coroutines.Continuation)
     public static final int systemProp(java.lang.String,int,int,int)
     public static synthetic java.lang.Object withContextUndispatched$default(kotlin.coroutines.CoroutineContext,java.lang.Object,java.lang.Object,kotlin.jvm.functions.Function2,kotlin.coroutines.Continuation,int)
     public static final kotlinx.coroutines.flow.FlowCollector withUndispatchedContextCollector(kotlinx.coroutines.flow.FlowCollector,kotlin.coroutines.CoroutineContext)
+com.imran.tvmaze.core.di.AppModule_ProvideCacheFactory
+com.imran.tvmaze.core.di.AppModule_ProvideDeleteFavoriteUseCaseFactory
+com.imran.tvmaze.core.di.AppModule_ProvideFavoriteRepositoryFactory
+com.imran.tvmaze.core.di.AppModule_ProvideFetchBookmarkUseCaseFactory
+com.imran.tvmaze.core.di.AppModule_ProvideGenerateMenuUseCaseFactory
 com.imran.tvmaze.core.di.AppModule_ProvideGenreRepositoryFactory
 com.imran.tvmaze.core.di.AppModule_ProvideGsonFactory
 com.imran.tvmaze.core.di.AppModule_ProvideInfoUseCaseFactory
@@ -40937,9 +41012,7 @@ com.imran.tvmaze.core.di.AppModule_ProvideRetrofitFactory
 com.imran.tvmaze.core.di.AppModule_ProvideRoomDataSourceFactory
 com.imran.tvmaze.core.di.AppModule_ProvideSearchDataSourceFactory
 com.imran.tvmaze.core.di.FragmentModule
-com.imran.tvmaze.core.di.FragmentModule_ProvideBrowseViewModelFactory
-com.imran.tvmaze.core.di.FragmentModule_ProvideInfoViewModelFactory
-com.imran.tvmaze.core.di.FragmentModule_ProvideMenuViewModelFactory:
+com.imran.tvmaze.core.di.FragmentModule_ProvideBookmarkViewModelFactory:
     public static final kotlinx.coroutines.channels.Channel Channel(int,kotlinx.coroutines.channels.BufferOverflow,kotlin.jvm.functions.Function1)
     public static kotlinx.coroutines.channels.Channel Channel$default(int,kotlinx.coroutines.channels.BufferOverflow,kotlin.jvm.functions.Function1,int)
     public static final kotlinx.coroutines.CompletableJob Job(kotlinx.coroutines.Job)
@@ -40981,7 +41054,8 @@ com.imran.tvmaze.core.di.FragmentModule_ProvideMenuViewModelFactory:
     public static final java.util.Set optimizeReadOnlySet(java.util.Set)
     public static final kotlinx.coroutines.channels.ReceiveChannel produce(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.CoroutineContext,int,kotlinx.coroutines.channels.BufferOverflow,int,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function2)
     public static kotlinx.coroutines.channels.ReceiveChannel produce$default(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.CoroutineContext,int,kotlinx.coroutines.channels.BufferOverflow,int,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function2,int)
-    public static com.imran.tvmaze.menu.presentation.viewmodel.MenuViewModel provideMenuViewModel(androidx.constraintlayout.widget.R$id,com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase)
+    public static com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel provideBookmarkViewModel(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase)
+    public static com.imran.tvmaze.menu.presentation.viewmodel.MenuViewModel provideMenuViewModel(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.menu.domain.usecase.GenerateMenuUseCase)
     public static final void rangeCheck$CollectionsKt__CollectionsKt(int,int,int)
     public static final kotlin.sequences.Sequence sequence(kotlin.jvm.functions.Function2)
     public static final varargs java.util.Set setOf(java.lang.Object[])
@@ -40993,6 +41067,58 @@ com.imran.tvmaze.core.di.FragmentModule_ProvideMenuViewModelFactory:
     public static synthetic long systemProp$default(java.lang.String,long,long,long,int)
     public static final void throwCountOverflow()
     public static final java.lang.Object toList(kotlinx.coroutines.flow.Flow,java.util.List,kotlin.coroutines.Continuation)
+com.imran.tvmaze.core.di.FragmentModule_ProvideBrowseViewModelFactory:
+    public static final kotlinx.coroutines.CompletableJob Job(kotlinx.coroutines.Job)
+    public static kotlinx.coroutines.CompletableJob Job$default(kotlinx.coroutines.Job,int,java.lang.Object)
+    public static final java.lang.Object[] arrayOfNulls(java.lang.Object[],int)
+    public static final kotlinx.coroutines.flow.SharedFlow asSharedFlow(kotlinx.coroutines.flow.MutableSharedFlow)
+    public static final kotlinx.coroutines.flow.StateFlow asStateFlow(kotlinx.coroutines.flow.MutableStateFlow)
+    public static final okio.Sink blackhole()
+    public static final okio.BufferedSink buffer(okio.Sink)
+    public static final okio.BufferedSource buffer(okio.Source)
+    public static synthetic void cancel$default(kotlin.coroutines.CoroutineContext,java.util.concurrent.CancellationException,int,java.lang.Object)
+    public static final void cancelFutureOnCancellation(kotlinx.coroutines.CancellableContinuation,java.util.concurrent.Future)
+    public static final void checkDebugMetadataVersion(int,int)
+    public static final void checkParallelism(int)
+    public static final void checkStepIsPositive(boolean,java.lang.Number)
+    public static final int coerceAtLeast(int,int)
+    public static final long coerceAtLeast(long,long)
+    public static final int coerceAtMost(int,int)
+    public static final long coerceAtMost(long,long)
+    public static final int coerceIn(int,int,int)
+    public static final java.util.Collection convertToSetForSetOperationWith(java.lang.Iterable,java.lang.Iterable)
+    public static final void copyOfRangeToIndexCheck(int,int)
+    public static final kotlinx.coroutines.EventLoop createEventLoop()
+    public static final int differenceModulo(int,int,int)
+    public static final void dispatcherFailure(kotlin.coroutines.Continuation,java.lang.Throwable)
+    public static final void ensureActive(kotlinx.coroutines.Job)
+    public static void ensureMainThread()
+    public static final kotlinx.coroutines.flow.Flow flow(kotlin.jvm.functions.Function2)
+    public static final kotlin.coroutines.jvm.internal.DebugMetadata getDebugMetadataAnnotation(kotlin.coroutines.jvm.internal.BaseContinuationImpl)
+    public static final kotlinx.coroutines.Delay getDelay(kotlin.coroutines.CoroutineContext)
+    public static final int getLabel(kotlin.coroutines.jvm.internal.BaseContinuationImpl)
+    public static final int getProgressionLastElement(int,int,int)
+    public static final java.lang.StackTraceElement getStackTraceElement(kotlin.coroutines.jvm.internal.BaseContinuationImpl)
+    public static void injectInfoViewModel(com.imran.tvmaze.info.presentation.ui.InfoFragment,com.imran.tvmaze.info.presentation.viewmodel.InfoViewModel)
+    public static boolean isMainThread()
+    public static final kotlinx.coroutines.Job launch(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.CoroutineContext,int,kotlin.jvm.functions.Function2)
+    public static kotlinx.coroutines.Job launch$default(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.CoroutineContext,int,kotlin.jvm.functions.Function2,int)
+    public static final void log(okhttp3.internal.concurrent.Task,okhttp3.internal.concurrent.TaskQueue,java.lang.String)
+    public static com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel provideBrowseViewModel(com.bumptech.glide.load.resource.gif.GifDrawableEncoder,com.imran.tvmaze.browse.domain.usecase.BrowseUseCase)
+    public static final int reverseBytes(int)
+    public static final short reverseBytes(short)
+    public static final boolean safeToConvertToSet(java.util.Collection)
+    public static final void startCoroutineCancellable(kotlin.coroutines.Continuation,kotlin.coroutines.Continuation)
+    public static final void startCoroutineCancellable(kotlin.jvm.functions.Function2,java.lang.Object,kotlin.coroutines.Continuation,kotlin.jvm.functions.Function1)
+    public static final int takeUpperBits(int,int)
+    public static final kotlin.Pair to(java.lang.Object,java.lang.Object)
+    public static final java.lang.String toHexString(int)
+    public static final java.lang.Object toState(java.lang.Object,kotlinx.coroutines.CancellableContinuation)
+    public static synthetic java.lang.Object toState$default(java.lang.Object,kotlin.jvm.functions.Function1,int)
+    public static java.lang.Object unsafeCast(java.lang.Object)
+    public static final java.lang.Object withContext(kotlin.coroutines.CoroutineContext,kotlin.jvm.functions.Function2,kotlin.coroutines.Continuation)
+com.imran.tvmaze.core.di.FragmentModule_ProvideInfoViewModelFactory
+com.imran.tvmaze.core.di.FragmentModule_ProvideMenuViewModelFactory
 com.imran.tvmaze.core.network.Result$Companion
 com.imran.tvmaze.core.network.Result$Status:
     public static final synthetic com.imran.tvmaze.core.network.Result$Status[] $values()
@@ -41015,6 +41141,10 @@ com.imran.tvmaze.databinding.ActivityMainBinding:
     public final androidx.fragment.app.FragmentContainerView navHostFragment
 com.imran.tvmaze.databinding.ActivityMainBindingImpl:
     public final androidx.constraintlayout.widget.ConstraintLayout mboundView0
+    public static final androidx.databinding.ViewDataBinding$IncludedLayouts sIncludes
+    public void <init>(androidx.databinding.DataBindingComponent,android.view.View,java.lang.Object[])
+    public void invalidateAll()
+com.imran.tvmaze.databinding.FragmentBookmarkBindingImpl:
     public static final androidx.databinding.ViewDataBinding$IncludedLayouts sIncludes
     public void <init>(androidx.databinding.DataBindingComponent,android.view.View,java.lang.Object[])
     public void invalidateAll()
@@ -41093,55 +41223,7 @@ com.imran.tvmaze.info.presentation.ui.InfoFragment:
     public static final void onCreateOptionsMenu$lambda-3$lambda-2$lambda-1(com.imran.tvmaze.info.presentation.ui.InfoFragment,android.widget.CheckBox,com.imran.tvmaze.core.network.Result)
     public void onViewCreated(com.imran.tvmaze.databinding.FragmentInfoBinding)
     public final void populateShowsInfo(com.imran.tvmaze.databinding.FragmentInfoBinding)
-com.imran.tvmaze.info.presentation.ui.InfoFragment_MembersInjector:
-    public static final kotlinx.coroutines.CompletableJob Job(kotlinx.coroutines.Job)
-    public static kotlinx.coroutines.CompletableJob Job$default(kotlinx.coroutines.Job,int,java.lang.Object)
-    public static final java.lang.Object[] arrayOfNulls(java.lang.Object[],int)
-    public static final kotlinx.coroutines.flow.SharedFlow asSharedFlow(kotlinx.coroutines.flow.MutableSharedFlow)
-    public static final kotlinx.coroutines.flow.StateFlow asStateFlow(kotlinx.coroutines.flow.MutableStateFlow)
-    public static final okio.Sink blackhole()
-    public static final okio.BufferedSink buffer(okio.Sink)
-    public static final okio.BufferedSource buffer(okio.Source)
-    public static synthetic void cancel$default(kotlin.coroutines.CoroutineContext,java.util.concurrent.CancellationException,int,java.lang.Object)
-    public static final void cancelFutureOnCancellation(kotlinx.coroutines.CancellableContinuation,java.util.concurrent.Future)
-    public static final void checkDebugMetadataVersion(int,int)
-    public static final void checkParallelism(int)
-    public static final void checkStepIsPositive(boolean,java.lang.Number)
-    public static final int coerceAtLeast(int,int)
-    public static final long coerceAtLeast(long,long)
-    public static final int coerceAtMost(int,int)
-    public static final long coerceAtMost(long,long)
-    public static final int coerceIn(int,int,int)
-    public static final java.util.Collection convertToSetForSetOperationWith(java.lang.Iterable,java.lang.Iterable)
-    public static final void copyOfRangeToIndexCheck(int,int)
-    public static final kotlinx.coroutines.EventLoop createEventLoop()
-    public static final int differenceModulo(int,int,int)
-    public static final void dispatcherFailure(kotlin.coroutines.Continuation,java.lang.Throwable)
-    public static final void ensureActive(kotlinx.coroutines.Job)
-    public static void ensureMainThread()
-    public static final kotlinx.coroutines.flow.Flow flow(kotlin.jvm.functions.Function2)
-    public static final kotlin.coroutines.jvm.internal.DebugMetadata getDebugMetadataAnnotation(kotlin.coroutines.jvm.internal.BaseContinuationImpl)
-    public static final kotlinx.coroutines.Delay getDelay(kotlin.coroutines.CoroutineContext)
-    public static final int getLabel(kotlin.coroutines.jvm.internal.BaseContinuationImpl)
-    public static final int getProgressionLastElement(int,int,int)
-    public static final java.lang.StackTraceElement getStackTraceElement(kotlin.coroutines.jvm.internal.BaseContinuationImpl)
-    public static void injectInfoViewModel(com.imran.tvmaze.info.presentation.ui.InfoFragment,com.imran.tvmaze.info.presentation.viewmodel.InfoViewModel)
-    public static boolean isMainThread()
-    public static final kotlinx.coroutines.Job launch(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.CoroutineContext,int,kotlin.jvm.functions.Function2)
-    public static kotlinx.coroutines.Job launch$default(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.CoroutineContext,int,kotlin.jvm.functions.Function2,int)
-    public static final void log(okhttp3.internal.concurrent.Task,okhttp3.internal.concurrent.TaskQueue,java.lang.String)
-    public static final int reverseBytes(int)
-    public static final short reverseBytes(short)
-    public static final boolean safeToConvertToSet(java.util.Collection)
-    public static final void startCoroutineCancellable(kotlin.coroutines.Continuation,kotlin.coroutines.Continuation)
-    public static final void startCoroutineCancellable(kotlin.jvm.functions.Function2,java.lang.Object,kotlin.coroutines.Continuation,kotlin.jvm.functions.Function1)
-    public static final int takeUpperBits(int,int)
-    public static final kotlin.Pair to(java.lang.Object,java.lang.Object)
-    public static final java.lang.String toHexString(int)
-    public static final java.lang.Object toState(java.lang.Object,kotlinx.coroutines.CancellableContinuation)
-    public static synthetic java.lang.Object toState$default(java.lang.Object,kotlin.jvm.functions.Function1,int)
-    public static java.lang.Object unsafeCast(java.lang.Object)
-    public static final java.lang.Object withContext(kotlin.coroutines.CoroutineContext,kotlin.jvm.functions.Function2,kotlin.coroutines.Continuation)
+com.imran.tvmaze.info.presentation.ui.InfoFragment_MembersInjector
 com.imran.tvmaze.info.presentation.viewmodel.InfoViewModel$insertFavorite$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 com.imran.tvmaze.info.presentation.viewmodel.InfoViewModel:

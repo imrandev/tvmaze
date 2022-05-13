@@ -1,5 +1,8 @@
 package com.imran.tvmaze.core.di
 
+import com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase
+import com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModel
+import com.imran.tvmaze.bookmark.presentation.viewmodel.BookmarkViewModelFactory
 import com.imran.tvmaze.browse.domain.usecase.BrowseUseCase
 import com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModel
 import com.imran.tvmaze.browse.presentation.viewmodel.BrowseViewModelFactory
@@ -35,5 +38,11 @@ class FragmentModule {
     @FragmentScoped
     fun provideMenuViewModel (generateMenuUseCase: GenerateMenuUseCase) : MenuViewModel {
         return MenuViewModelFactory(generateMenuUseCase).create(MenuViewModel::class.java)
+    }
+
+    @Provides
+    @FragmentScoped
+    fun provideBookmarkViewModel (fetchBookmarkUseCase: FetchBookmarkUseCase) : BookmarkViewModel {
+        return BookmarkViewModelFactory(fetchBookmarkUseCase).create(BookmarkViewModel::class.java)
     }
 }

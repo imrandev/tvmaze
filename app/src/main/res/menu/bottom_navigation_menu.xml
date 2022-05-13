@@ -12,7 +12,7 @@
     <item
         android:id="@id/browseFragment"
         android:title="@string/browse"
-        android:icon="@drawable/ic_bottom_nav_browser"
+        android:icon="@drawable/ic_bottom_nav_local_movies"
         app:showAsAction="ifRoom"
         />
 

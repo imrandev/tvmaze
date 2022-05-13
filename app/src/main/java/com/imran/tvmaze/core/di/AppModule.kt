@@ -7,6 +7,7 @@ import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.imran.tvmaze.BuildConfig
+import com.imran.tvmaze.bookmark.domain.usecase.FetchBookmarkUseCase
 import com.imran.tvmaze.browse.data.repository.BrowseRepositoryImpl
 import com.imran.tvmaze.browse.data.source.BrowseDataSource
 import com.imran.tvmaze.browse.data.source.SearchDataSource
@@ -146,5 +147,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideGenerateMenuViewModel() = GenerateMenuUseCase()
+    fun provideGenerateMenuUseCase() = GenerateMenuUseCase()
+
+    @Provides
+    @Singleton
+    fun provideFetchBookmarkUseCase(bookmarkRepository: BookmarkRepository) = FetchBookmarkUseCase(bookmarkRepository)
 }

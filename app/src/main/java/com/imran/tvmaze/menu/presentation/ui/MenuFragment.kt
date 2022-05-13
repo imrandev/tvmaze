@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.imran.tvmaze.R
@@ -64,7 +65,11 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
             }
 
             override fun onInfiniteLoadingView(parent: ViewGroup): BaseViewHolder<MenuItem, IBaseClickListener<MenuItem>> {
-                TODO("Not yet implemented")
+                return MenuViewHolder(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context), R.layout.rv_item_loading, parent, false
+                    )
+                )
             }
 
             override fun onEmptyView(parent: ViewGroup): BaseViewHolder<MenuItem, IBaseClickListener<MenuItem>> {
@@ -80,7 +85,15 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
 
     private val menuItemClickListener = object : IBaseClickListener<MenuItem> {
         override fun onItemClicked(view: View?, item: MenuItem, position: Int) {
-
+            when(item.label){
+                "Bookmarks" -> {
+                    val navController = Navigation.findNavController(
+                        requireActivity(),
+                        R.id.navHostFragment
+                    )
+                    navController.navigate(R.id.action_menuFragment_to_bookmarkFragment)
+                }
+            }
         }
     }
 }

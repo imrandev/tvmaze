@@ -3,11 +3,13 @@ package com.imran.tvmaze.core.db.domain.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.imran.tvmaze.core.base.model.Core
+import java.io.Serializable
 
 @Entity
 data class Bookmark(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    override var id: Int = 0,
     @ColumnInfo
     val url: String?,
     @ColumnInfo
@@ -48,4 +50,4 @@ data class Bookmark(
     val original: String?,
     @ColumnInfo
     val summary: String?
-)
+) : Core(), Serializable
